@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>우리의 결혼식에 초대합니다</title>
-    <!-- 구글 폰트: 다정한 느낌의 마루부리 세리프체와 손글씨 느낌의 나눔손글씨 사용 -->
+    <!-- 구글 폰트: 마루부리 세리프체와 손글씨 느낌의 나눔손글씨 사용 -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Maru+Buri:wght@300;400&family=Nanum+Pen+Script&display=swap">
     
     <style>
@@ -19,22 +19,6 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        <!-- BGM 오디오 태그 (자동재생, 반복재생 설정) -->
-<audio id="bgm" src="wedding-bgm.mp3.m4a" autoplay loop></audio>
-
-<!-- 음악 컨트롤 버튼 -->
-<button id="bgmBtn" onclick="toggleBgm()" style="
-    background: rgba(255, 255, 255, 0.8);
-    border: 1px solid #C2B39E;
-    padding: 6px 12px;
-    font-size: 0.75rem;
-    border-radius: 20px;
-    cursor: pointer;
-    margin-bottom: 20px;
-    font-family: inherit;
-    color: #555555;
-">🎵 BGM 재생 중</button>
-        
         .container {
             max-width: 450px; /* 스마트폰 화면 최대 폭 고정 */
             margin: 0 auto;
@@ -74,6 +58,21 @@
             color: #888888;
             margin-top: 12px;
             font-style: italic;
+            margin-bottom: 25px;
+        }
+
+        /* BGM 버튼 디자인 정의 */
+        .bgm-button {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid #C2B39E;
+            padding: 8px 16px;
+            font-size: 0.75rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: inherit;
+            color: #555555;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: all 0.2s;
         }
 
         /* 2. 인사말 섹션 */
@@ -135,6 +134,10 @@
 </head>
 <body>
 
+    <!-- BGM 오디오 태그 (자동재생, 반복재생 설정) -->
+    <!-- ⚠️ 깃허브에 올릴 음악 파일명을 정확히 'wedding-bgm.mp3' 또는 'wedding-bgm.m4a' 등으로 맞추고 아래 src도 통일해 주세요 -->
+    <audio id="bgm" src="wedding-bgm.mp3" autoplay loop></audio>
+
     <div class="container">
         
         <!-- [1면 연동] 메인 섹션 -->
@@ -143,10 +146,13 @@
                 우리의 결혼식에<br>당신을 초대하고 싶습니다.
             </div>
             <div class="photo-frame">
-                <!-- 💡 'wedding-photo.jpg' 자리에 실제 두 분의 사진 파일명을 넣으시면 됩니다 -->
-                <img src="wedding-photo.jpg.JPG" alt="결혼식 스냅 사진">
+                <!-- ⚠️ 깃허브에 올린 사진 파일명과 완벽히 일치해야 합니다 (대소문자 주의) -->
+                <img src="wedding-photo.jpg" alt="결혼식 스냅 사진">
             </div>
             <div class="credit">photographed by 상헌lee</div>
+
+            <!-- 음악 컨트롤 버튼 (하객들이 누르기 가장 좋은 메인 하단에 배치) -->
+            <button id="bgmBtn" class="bgm-button" onclick="toggleBgm()">🎵 BGM 재생 중</button>
         </section>
 
         <!-- [2면 연동] 인사말 섹션 -->
@@ -167,8 +173,8 @@
             <div style="font-size: 1.05rem; margin-bottom: 10px;">오시는 길</div>
             <div style="font-size: 0.85rem; color: #777777;">W웨딩 국민연금홀 (부산 연제구 중앙대로 1000)</div>
             
-            <!-- 💡 'wedding-map.png' 자리에 제가 앞서 만들어드린 손그림 약도 파일명을 넣으시면 됩니다 -->
-            <img src="wedding-map.png.png" alt="W웨딩 국민연금홀 약도">
+            <!-- ⚠️ 깃허브에 올린 약도 이미지 파일명과 일치해야 합니다 -->
+            <img src="wedding-map.png" alt="W웨딩 국민연금홀 약도">
             
             <br>
             <!-- 네이버 지도 바로가기 버튼 링크 -->
@@ -190,7 +196,7 @@
 
     </div>
 
-</body>
+    <!-- 기능 제어 스크립트 (body 닫히기 직전 위치) -->
     <script>
     function toggleBgm() {
         var bgm = document.getElementById('bgm');
@@ -206,6 +212,6 @@
             btn.style.opacity = '0.6';
         }
     }
-</script>
-    
+    </script>
+</body>
 </html>
