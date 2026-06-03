@@ -19,6 +19,22 @@
             -webkit-font-smoothing: antialiased;
         }
 
+        <!-- BGM 오디오 태그 (자동재생, 반복재생 설정) -->
+<audio id="bgm" src="wedding-bgm.mp3.m4a" autoplay loop></audio>
+
+<!-- 음악 컨트롤 버튼 -->
+<button id="bgmBtn" onclick="toggleBgm()" style="
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid #C2B39E;
+    padding: 6px 12px;
+    font-size: 0.75rem;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    font-family: inherit;
+    color: #555555;
+">🎵 BGM 재생 중</button>
+        
         .container {
             max-width: 450px; /* 스마트폰 화면 최대 폭 고정 */
             margin: 0 auto;
@@ -175,4 +191,21 @@
     </div>
 
 </body>
+    <script>
+    function toggleBgm() {
+        var bgm = document.getElementById('bgm');
+        var btn = document.getElementById('bgmBtn');
+        
+        if (bgm.paused) {
+            bgm.play();
+            btn.innerText = '🎵 BGM 재생 중';
+            btn.style.opacity = '1';
+        } else {
+            bgm.pause();
+            btn.innerText = '🔇 BGM 꺼짐';
+            btn.style.opacity = '0.6';
+        }
+    }
+</script>
+    
 </html>
