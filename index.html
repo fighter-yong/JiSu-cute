@@ -4,22 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=yes">
     <title>우리의 결혼식에 초대합니다</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@300;400;700&display=swap">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="우리의 결혼식에 초대합니다.">
+    <meta property="og:description" content="2026. 8. 8.(토) 11:30">
+    <meta property="og:image" content="photo13.JPG"> <meta property="og:url" content="https://yongwooklee.github.io/"> <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@300;400;700&display=swap">
     
     <style>
         /* === 전통 한지(Hanji) 질감 배경 무드 커스텀 디자인 === */
         body {
             margin: 0;
             padding: 0;
-            /* 은은한 한지 미색 베이스 바탕색 */
             background-color: #FAF6EE; 
-            /* 섬유 결이 살아있는 미세 한지 격자 텍스처 패턴 매핑 */
             background-image: 
                 radial-gradient(rgba(0,0,0,0.01) 15%, transparent 16%),
                 linear-gradient(0deg, rgba(240,232,218,0.4) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(240,232,218,0.4) 1px, transparent 1px);
             background-size: 6px 6px, 14px 14px, 14px 14px;
-            /* 배경색과 패턴을 고급스럽게 융합시키는 블렌딩 기술 적용 */
             background-blend-mode: multiply;
             font-family: 'Gowun Batang', Georgia, serif;
             color: #333333;
@@ -108,7 +109,7 @@
 
         /* 2. 인사말 섹션 */
         .intro-section {
-            background-color: #F6F0E2; /* 약간 더 깊이감 있는 한지 무드 분리 */
+            background-color: #F6F0E2; 
         }
         .intro-text {
             font-size: 1.05rem;
@@ -278,22 +279,40 @@
             text-align: left;
             border-bottom: 1px solid #ECE4D5;
         }
+        .acc-group:last-child {
+            border-bottom: none;
+        }
         .acc-group-title {
             font-weight: bold;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: #6E7F6A;
             margin-bottom: 12px;
             border-left: 3px solid #6E7F6A;
             padding-left: 6px;
         }
+        .acc-sub-block {
+            margin-bottom: 12px;
+        }
+        .acc-sub-block:last-child {
+            margin-bottom: 0;
+        }
+        .acc-label {
+            font-weight: bold;
+            font-size: 0.85rem;
+            color: #555555;
+            margin-bottom: 4px;
+            display: block;
+        }
         .acc-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 10px;
             font-size: 0.85rem;
+            margin-bottom: 6px;
         }
-        .acc-row:last-child { margin-bottom: 0; }
+        .acc-row:last-child {
+            margin-bottom: 0;
+        }
         .copy-btn {
             background-color: #FFFFFF;
             border: 1px solid #C2B39E;
@@ -528,28 +547,40 @@
             <div class="acc-content" id="accContent">
                 <div class="acc-content-inner">
                     <div class="acc-group">
-                        <div class="acc-group-title">신랑 측</div>
+                        <div class="acc-sub-block">
+                            <span class="acc-label">신랑 측</span>
+                            <span class="acc-label" style="font-weight: normal; color: #333;">혼주 : 이기주, 윤미경</span>
+                        </div>
                         <div class="acc-row">
                             <span>부산은행 057-12-096448-4 (이기주)</span>
                             <button class="copy-btn" onclick="copyAccount('057120964484')">계좌 복사</button>
                         </div>
-                        <div class="acc-row">
+                        <div class="acc-row" style="margin-bottom: 15px;">
                             <span>부산은행 057-12-050602-9 (윤미경)</span>
                             <button class="copy-btn" onclick="copyAccount('057120506029')">계좌 복사</button>
                         </div>
+                        <div class="acc-sub-block">
+                            <span class="acc-label" style="font-weight: normal; color: #333;">신랑 : 이용욱</span>
+                        </div>
                         <div class="acc-row">
-                            <span>부산은행 057-12-094556-6 (이용욱)</span>
+                            <span>부산은행 057-12-094556-6</span>
                             <button class="copy-btn" onclick="copyAccount('057120945566')">계좌 복사</button>
                         </div>
                     </div>
                     <div class="acc-group">
-                        <div class="acc-group-title">신부 측</div>
-                        <div class="acc-row">
+                        <div class="acc-sub-block">
+                            <span class="acc-label">신부 측</span>
+                            <span class="acc-label" style="font-weight: normal; color: #333;">혼주 : 강호성, 박성희</span>
+                        </div>
+                        <div class="acc-row" style="margin-bottom: 15px;">
                             <span>우리은행 1002-453-995808 (강호성)</span>
                             <button class="copy-btn" onclick="copyAccount('1002453995808')">계좌 복사</button>
                         </div>
+                        <div class="acc-sub-block">
+                            <span class="acc-label" style="font-weight: normal; color: #333;">신부 : 강지수</span>
+                        </div>
                         <div class="acc-row">
-                            <span>우리은행 1002-041-199939 (강지수)</span>
+                            <span>우리은행 1002-041-199939</span>
                             <button class="copy-btn" onclick="copyAccount('1002041199939')">계좌 복사</button>
                         </div>
                     </div>
