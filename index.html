@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>우리의 결혼식에 초대합니다</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Gowun+Batang:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap">
     
     <style>
         /* 전체 기본 스타일 */
@@ -31,41 +31,18 @@
             border-bottom: 1px solid #F2EFE9;
         }
 
-        .funny-font {
-            font-family: 'Gamja Flower', cursive;
-        }
-
-        /* 반듯한 글자체 전용 스타일 (신랑 신부 이름용) */
-        .neat-font {
-            font-family: -apple-system, BlinkMacSystemFont, "Malgun Gothic", "맑은 고딕", helvetica, sans-serif;
-            font-weight: 600;
-            letter-spacing: 2px;
-        }
-
         /* 1. 메인 섹션 */
         .main-section {
             padding-top: 50px;
             padding-bottom: 20px;
         }
-        .main-title-box {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 35px;
-        }
         .main-title {
-            font-size: 1.9rem;
+            font-size: 1.25rem;
             color: #222222;
-            line-height: 1.2;
-            margin: 0;
-        }
-        /* 분홍색 꽃 아이콘 */
-        .pink-flower {
-            width: 22px;
-            height: 22px;
-            fill: #FFB7B2; 
-            vertical-align: middle;
+            line-height: 1.6;
+            margin: 0 0 35px 0;
+            font-weight: 700;
+            letter-spacing: -0.5px;
         }
         .photo-container {
             width: 100%;
@@ -86,7 +63,7 @@
             text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
         }
 
-        /* BGM 버튼 */
+        /* BGM 컨트롤러 버튼 */
         .bgm-center-container {
             display: flex;
             justify-content: center;
@@ -119,28 +96,44 @@
             margin-bottom: 35px;
         }
         .names-box {
-            font-size: 1.25rem;
+            font-size: 1.2rem;
+            font-weight: 700;
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
+            letter-spacing: 1px;
+        }
+        /* 풀 잎사귀 SVG 아이콘 */
+        .leaf-svg {
+            width: 20px;
+            height: 20px;
+            fill: #8FA48B;
+            vertical-align: middle;
         }
 
-        /* 섹션 타이틀 공통 확대 스타일 */
+        /* 섹션 타이틀 스타일 */
         .section-large-title {
-            font-size: 1.35rem;
+            font-size: 1.3rem;
             font-weight: bold;
             margin-bottom: 15px;
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
+        }
+        /* 사진첩 모양 SVG 아이콘 */
+        .album-svg {
+            width: 22px;
+            height: 22px;
+            fill: #554A3C;
+            vertical-align: middle;
         }
 
-        /* 3. 사진첩 섹션 (7행 3열 + 마지막 2행 2열 배치) */
+        /* 3. 사진첩 섹션 (가변 Grid 레이아웃) */
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(6, 1fr); /* 2와 3의 최소공배수인 6열 베이스 구성 */
+            grid-template-columns: repeat(6, 1fr);
             gap: 6px;
             margin-top: 20px;
         }
@@ -151,41 +144,56 @@
             cursor: pointer;
             border-radius: 2px;
         }
-        /* 1번~15번 사진: 3열 배치 (6칸 중 2칸씩 차지) */
-        .col-3 {
-            grid-column: span 2;
-        }
-        /* 16번~19번 사진: 2열 배치 (6칸 중 3칸씩 차지) */
-        .col-2 {
-            grid-column: span 3;
-        }
+        .col-3 { grid-column: span 2; }
+        .col-2 { grid-column: span 3; }
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
-        /* 사진 확대 라이트박스 */
+        /* 사진 확대 라이트박스 및 스와이프 터치 영역 */
         .lightbox {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
+            background-color: rgba(0, 0, 0, 0.95);
             z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            touch-action: none; /* 브라우저 기본 스크롤 방지하여 스와이프 감도 최적화 */
+        }
+        .lightbox-content-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
             justify-content: center;
             align-items: center;
         }
         .lightbox img {
             max-width: 95%;
-            max-height: 85%;
+            max-height: 80%;
+            object-fit: contain;
+            user-select: none;
+            -webkit-user-drag: none;
         }
         .lightbox-close {
             position: absolute;
             top: 20px; right: 20px;
             color: #FFFFFF;
-            font-size: 2rem;
+            font-size: 2.2rem;
             cursor: pointer;
             padding: 10px;
+            z-index: 10001;
+        }
+        /* 스와이프 안내 힌트 화살표 (모바일 터치 시 숨김 가능) */
+        .lightbox-hint {
+            position: absolute;
+            bottom: 30px;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.8rem;
+            letter-spacing: 1px;
         }
 
         /* 4. 오시는 길 섹션 */
@@ -195,7 +203,7 @@
             border: 1px solid #EAE6DF;
             background-color: #FFFFFF;
             box-sizing: border-box;
-            cursor: pointer;
+            display: block;
         }
         .map-wrapper img {
             width: 100%;
@@ -222,15 +230,12 @@
 
         /* 5. 마음 전하실 곳 섹션 */
         .acc-btn-box {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
             width: 100%;
             background-color: #F4F1EA;
             border: 1px solid #E4DFD5;
             border-radius: 4px;
             cursor: pointer;
+            box-sizing: border-box;
         }
         .acc-btn {
             background: none;
@@ -241,11 +246,7 @@
             font-family: 'Gowun Batang', serif;
             font-weight: bold;
             cursor: pointer;
-        }
-        .pink-cosmos {
-            width: 16px;
-            height: 16px;
-            fill: #FFB7B2;
+            width: 100%;
         }
         .acc-content {
             max-height: 0;
@@ -417,11 +418,7 @@
         <audio id="weddingBgm" loop src="wedding-bgm.mp3.m4a"></audio>
 
         <section class="main-section">
-            <div class="main-title-box funny-font">
-                <svg class="pink-flower" viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,5A2,2 0 0,1 14,7A2,2 0 0,1 12,9A2,2 0 0,1 10,7A2,2 0 0,1 12,5M7,10A2,2 0 0,1 9,12A2,2 0 0,1 7,14A2,2 0 0,1 5,12A2,2 0 0,1 7,10M17,10A2,2 0 0,1 19,12A2,2 0 0,1 17,14A2,2 0 0,1 15,12A2,2 0 0,1 17,10M12,15A2,2 0 0,1 14,17A2,2 0 0,1 12,19A2,2 0 0,1 10,17A2,2 0 0,1 12,15Z"/></svg>
-                <h1 class="main-title">결혼식에 초대하고 싶습니다!</h1>
-                <svg class="pink-flower" viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,5A2,2 0 0,1 14,7A2,2 0 0,1 12,9A2,2 0 0,1 10,7A2,2 0 0,1 12,5M7,10A2,2 0 0,1 9,12A2,2 0 0,1 7,14A2,2 0 0,1 5,12A2,2 0 0,1 7,10M17,10A2,2 0 0,1 19,12A2,2 0 0,1 17,14A2,2 0 0,1 15,12A2,2 0 0,1 17,10M12,15A2,2 0 0,1 14,17A2,2 0 0,1 12,19A2,2 0 0,1 10,17A2,2 0 0,1 12,15Z"/></svg>
-            </div>
+            <h1 class="main-title">우리 결혼식에 당신을 초대하고 싶습니다!</h1>
             <div class="photo-container">
                 <img src="photo13.JPG" alt="결혼식 메인 사진">
                 <div class="credit">Thanks to 상헌&지은lee</div>
@@ -442,43 +439,49 @@
                 평생 재미있게 살고 싶습니다.<br>
                 축복해 주셔서 감사합니다.
             </div>
-            <div class="names-box neat-font">
+            <div class="names-box">
                 <span>지수</span> 
-                <svg class="pink-flower" viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,5A2,2 0 0,1 14,7A2,2 0 0,1 12,9A2,2 0 0,1 10,7A2,2 0 0,1 12,5M7,10A2,2 0 0,1 9,12A2,2 0 0,1 7,14A2,2 0 0,1 5,12A2,2 0 0,1 7,10M17,10A2,2 0 0,1 19,12A2,2 0 0,1 17,14A2,2 0 0,1 15,12A2,2 0 0,1 17,10M12,15A2,2 0 0,1 14,17A2,2 0 0,1 12,19A2,2 0 0,1 10,17A2,2 0 0,1 12,15Z"/></svg>
+                <svg class="leaf-svg" viewBox="0 0 24 24"><path d="M17,8C15.21,8 13.54,8.69 12.27,9.84L12.5,8H14V6H11V8C10.53,8.04 10.07,8.11 9.62,8.23L7.71,6.32L6.29,7.74L8.47,9.92C7.03,10.77 5.83,12 5.04,13.5L3.13,11.59L1.71,13.01L3.9,15.2C3.12,16.94 3,18.84 3.58,20.67C3.69,21 4,21.19 4.31,21.1C6.14,20.5 8.05,20.4 9.79,19.61L12,21.82L13.41,20.4L11.5,18.49C13,17.7 14.22,16.5 15.07,15.06L17.24,17.24L18.66,15.82L16.75,13.91C16.88,13.46 16.95,13 17,12.5H19V9.5H17V8M15,12.5C15,13.92 14.22,15.21 13.04,15.93L9.67,12.56C11,10.94 13.06,10 15,10V12.5M6,17.5C5.46,15.54 6.4,13.44 8.03,12.12L11.4,15.47C10.1,17.1 8,18 6,17.5Z"/></svg>
                 <span>용욱</span>
             </div>
         </section>
 
         <section>
-            <div class="section-large-title">사진첩 🤭</div>
+            <div class="section-large-title">
+                사진첩 
+                <svg class="album-svg" viewBox="0 0 24 24"><path d="M19,19H5V5H19M19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M13.96,12.29L11.21,15.83L9.25,13.47L6.5,17H17.5L13.96,12.29Z"/></svg>
+            </div>
             
             <div class="gallery-grid">
-                <div class="gallery-item col-3" onclick="openLightbox('photo1.jpg')"><img src="photo1.jpg" alt="사진1"></div>
-                <div class="gallery-item col-3" onclick="openLightbox('photo2.jpg')"><img src="photo2.jpg" alt="사진2"></div>
-                <div class="gallery-item col-3" onclick="openLightbox('photo3.jpg')"><img src="photo3.jpg" alt="사진3"></div>
-                <div class="gallery-item col-3" onclick="openLightbox('photo4.jpg')"><img src="photo4.jpg" alt="사진4"></div>
-                <div class="gallery-item col-3" onclick="openLightbox('photo5.jpg')"><img src="photo5.jpg" alt="사진5"></div>
-                <div class="gallery-item col-3" onclick="openLightbox('photo6.jpg')"><img src="photo6.jpg" alt="사진6"></div>
-                <div class="gallery-item col-3" onclick="openLightbox('photo7.jpg')"><img src="photo7.jpg" alt="사진7"></div>
-                <div class="gallery-item col-3" onclick="openLightbox('photo8.jpg')"><img src="photo8.jpg" alt="사진8"></div>
-                <div class="gallery-item col-3" onclick="openLightbox('photo9.jpg')"><img src="photo9.jpg" alt="사진9"></div>
-                <div class="gallery-item col-3" onclick="openLightbox('photo10.jpg')"><img src="photo10.jpg" alt="사진10"></div>
-                <div class="gallery-item col-3" onclick="openLightbox('photo11.jpg')"><img src="photo11.jpg" alt="사진11"></div>
-                <div class="gallery-item col-3" onclick="openLightbox('photo12.jpg')"><img src="photo12.jpg" alt="사진12"></div>
-                <div class="gallery-item col-3" onclick="openLightbox('photo13.JPG')"><img src="photo13.JPG" alt="사진13"></div>
-                <div class="gallery-item col-3" onclick="openLightbox('photo14.jpg')"><img src="photo14.jpg" alt="사진14"></div>
-                <div class="gallery-item col-3" onclick="openLightbox('photo15.jpg')"><img src="photo15.jpg" alt="사진15"></div>
+                <div class="gallery-item col-3" onclick="openLightbox(0)"><img src="photo1.jpg" alt="사진1"></div>
+                <div class="gallery-item col-3" onclick="openLightbox(1)"><img src="photo2.jpg" alt="사진2"></div>
+                <div class="gallery-item col-3" onclick="openLightbox(2)"><img src="photo3.jpg" alt="사진3"></div>
+                <div class="gallery-item col-3" onclick="openLightbox(3)"><img src="photo4.jpg" alt="사진4"></div>
+                <div class="gallery-item col-3" onclick="openLightbox(4)"><img src="photo5.jpg" alt="사진5"></div>
+                <div class="gallery-item col-3" onclick="openLightbox(5)"><img src="photo6.jpg" alt="사진6"></div>
+                <div class="gallery-item col-3" onclick="openLightbox(6)"><img src="photo7.jpg" alt="사진7"></div>
+                <div class="gallery-item col-3" onclick="openLightbox(7)"><img src="photo8.jpg" alt="사진8"></div>
+                <div class="gallery-item col-3" onclick="openLightbox(8)"><img src="photo9.jpg" alt="사진9"></div>
+                <div class="gallery-item col-3" onclick="openLightbox(9)"><img src="photo10.jpg" alt="사진10"></div>
+                <div class="gallery-item col-3" onclick="openLightbox(10)"><img src="photo11.jpg" alt="사진11"></div>
+                <div class="gallery-item col-3" onclick="openLightbox(11)"><img src="photo12.jpg" alt="사진12"></div>
+                <div class="gallery-item col-3" onclick="openLightbox(12)"><img src="photo13.jpg" alt="사진13"></div>
+                <div class="gallery-item col-3" onclick="openLightbox(13)"><img src="photo14.jpg" alt="사진14"></div>
+                <div class="gallery-item col-3" onclick="openLightbox(14)"><img src="photo15.jpg" alt="사진15"></div>
                 
-                <div class="gallery-item col-2" onclick="openLightbox('photo16.jpg')"><img src="photo16.jpg" alt="사진16"></div>
-                <div class="gallery-item col-2" onclick="openLightbox('photo17.jpg')"><img src="photo17.jpg" alt="사진17"></div>
-                <div class="gallery-item col-2" onclick="openLightbox('photo18.jpg')"><img src="photo18.jpg" alt="사진18"></div>
-                <div class="gallery-item col-2" onclick="openLightbox('photo19.jpg')"><img src="photo19.jpg" alt="사진19"></div>
+                <div class="gallery-item col-2" onclick="openLightbox(15)"><img src="photo16.jpg" alt="사진16"></div>
+                <div class="gallery-item col-2" onclick="openLightbox(16)"><img src="photo17.jpg" alt="사진17"></div>
+                <div class="gallery-item col-2" onclick="openLightbox(17)"><img src="photo18.jpg" alt="사진18"></div>
+                <div class="gallery-item col-2" onclick="openLightbox(18)"><img src="photo19.jpg" alt="사진19"></div>
             </div>
         </section>
 
         <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-            <span class="lightbox-close">&times;</span>
-            <img id="lightboxImg" src="" alt="확대">
+            <span class="lightbox-close" onclick="event.stopPropagation(); closeLightbox();">&times;</span>
+            <div class="lightbox-content-wrapper" id="lightboxWrapper">
+                <img id="lightboxImg" src="" alt="확대">
+                <div class="lightbox-hint">◀ 좌우로 쓸어서 넘겨보기 ▶</div>
+            </div>
         </div>
 
         <section class="map-section">
@@ -486,8 +489,8 @@
             <div style="font-size: 0.9rem; color: #111111; margin-bottom: 3px; font-weight: bold;">W웨딩 국민연금 웨딩홀 1층 컨벤션 홀</div>
             <div style="font-size: 0.8rem; color: #666666; margin-bottom: 15px;">주소 : 부산광역시 연제구 중앙대로 1000, 1층</div>
             
-            <a href="https://map.naver.com/v5/entry/place/12028881" target="_blank" class="map-wrapper" style="display:block;">
-                <img src="약도.jpg" alt="W웨딩 국민연금 웨딩홀 약도 (클릭 시 네이버 지도로 이동)">
+            <a href="https://map.naver.com/v5/entry/place/12028881" target="_blank" class="map-wrapper">
+                <img src="약도.jpg" alt="W웨딩 국민연금 웨딩홀 약도">
             </a>
             
             <div class="navi-buttons">
@@ -499,9 +502,7 @@
 
         <section>
             <div class="acc-btn-box" onclick="toggleAccordion()">
-                <svg class="pink-cosmos" viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,5A2,2 0 0,1 14,7A2,2 0 0,1 12,9A2,2 0 0,1 10,7A2,2 0 0,1 12,5M7,10A2,2 0 0,1 9,12A2,2 0 0,1 7,14A2,2 0 0,1 5,12A2,2 0 0,1 7,10M17,10A2,2 0 0,1 19,12A2,2 0 0,1 17,14A2,2 0 0,1 15,12A2,2 0 0,1 17,10M12,15A2,2 0 0,1 14,17A2,2 0 0,1 12,19A2,2 0 0,1 10,17A2,2 0 0,1 12,15Z"/></svg>
                 <button class="acc-btn">축복의 마음 전하실 곳</button>
-                <svg class="pink-cosmos" viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,5A2,2 0 0,1 14,7A2,2 0 0,1 12,9A2,2 0 0,1 10,7A2,2 0 0,1 12,5M7,10A2,2 0 0,1 9,12A2,2 0 0,1 7,14A2,2 0 0,1 5,12A2,2 0 0,1 7,10M17,10A2,2 0 0,1 19,12A2,2 0 0,1 17,14A2,2 0 0,1 15,12A2,2 0 0,1 17,10M12,15A2,2 0 0,1 14,17A2,2 0 0,1 12,19A2,2 0 0,1 10,17A2,2 0 0,1 12,15Z"/></svg>
             </div>
             
             <div class="acc-content" id="accContent">
@@ -558,12 +559,12 @@
     </div>
 
     <script>
-        /* === 1. BGM 플레이어 === */
+        /* === 1. BGM 컨트롤 스크립트 === */
         function toggleBgm() {
             const audio = document.getElementById('weddingBgm');
             const btn = document.getElementById('bgmToggleBtn');
             if (audio.paused) {
-                audio.play().catch(e => alert("음악 재생은 브라우저 정책상 터치 후 구동됩니다."));
+                audio.play().catch(e => alert("음악 재생은 브라우저 정책상 화면 터치 후 구동 가능합니다."));
                 btn.innerHTML = "<span>■ BGM 멈춤</span>";
             } else {
                 audio.pause();
@@ -571,13 +572,80 @@
             }
         }
 
-        /* === 2. 라이트박스 뷰어 === */
-        function openLightbox(imgSrc) {
-            document.getElementById('lightboxImg').src = imgSrc;
+        /* === 2. 라이트박스 확대보기 및 스위핑(Swipe) 로직 엔진 === */
+        let activeImgIdx = 0;
+        // 총 19장의 사진 리스트 인덱스 데이터 맵 생성
+        const galleryImages = [
+            'photo1.jpg', 'photo2.jpg', 'photo3.jpg', 'photo4.jpg', 'photo5.jpg',
+            'photo6.jpg', 'photo7.jpg', 'photo8.jpg', 'photo9.jpg', 'photo10.jpg',
+            'photo11.jpg', 'photo12.jpg', 'photo13.jpg', 'photo14.jpg', 'photo15.jpg',
+            'photo16.jpg', 'photo17.jpg', 'photo18.jpg', 'photo19.jpg'
+        ];
+
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        function openLightbox(index) {
+            activeImgIdx = index;
+            updateLightboxImg();
             document.getElementById('lightbox').style.display = 'flex';
+            window.addEventListener('keydown', handleKeyDown);
         }
+
         function closeLightbox() {
             document.getElementById('lightbox').style.display = 'none';
+            window.removeEventListener('keydown', handleKeyDown);
+        }
+
+        function updateLightboxImg() {
+            document.getElementById('lightboxImg').src = galleryImages[activeImgIdx];
+        }
+
+        function nextImage() {
+            activeImgIdx = (activeImgIdx + 1) % galleryImages.length;
+            updateLightboxImg();
+        }
+
+        function prevImage() {
+            activeImgIdx = (activeImgIdx - 1 + galleryImages.length) % galleryImages.length;
+            updateLightboxImg();
+        }
+
+        // 스위핑 제스처 인식 터치 핸들러 바인딩
+        const lightboxArea = document.getElementById('lightbox');
+
+        lightboxArea.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        }, false);
+
+        lightboxArea.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipeGesture();
+        }, false);
+
+        // 마우스 드래그 스위핑 호환 바인딩 (PC 대응)
+        lightboxArea.addEventListener('mousedown', function(e) {
+            touchStartX = e.screenX;
+        }, false);
+
+        lightboxArea.addEventListener('mouseup', function(e) {
+            touchEndX = e.screenX;
+            handleSwipeGesture();
+        }, false);
+
+        function handleSwipeGesture() {
+            const swipeThreshold = 40; // 스위핑 판정 최소 드래그 거리 (픽셀 단위)
+            if (touchStartX - touchEndX > swipeThreshold) {
+                nextImage(); // 왼쪽으로 밀었을 때 -> 다음 사진
+            } else if (touchEndX - touchStartX > swipeThreshold) {
+                prevImage(); // 오른쪽으로 밀었을 때 -> 이전 사진
+            }
+        }
+
+        function handleKeyDown(e) {
+            if (e.key === 'ArrowRight') nextImage();
+            if (e.key === 'ArrowLeft') prevImage();
+            if (e.key === 'Escape') closeLightbox();
         }
 
         /* === 3. 아코디언 컴포넌트 === */
@@ -590,7 +658,7 @@
             }
         }
 
-        /* === 4. 클립보드 복사 기법 === */
+        /* === 4. 클립보드 복사 === */
         function copyAccount(accountNumber) {
             navigator.clipboard.writeText(accountNumber).then(() => {
                 alert("계좌번호가 성공적으로 복사되었습니다.");
@@ -605,7 +673,7 @@
             });
         }
 
-        /* === 5. 데이터 영속화 방명록 페이징 및 백그라운드 관리형 롱프레스 스크립트 === */
+        /* === 5. 로컬스토리지 방명록 & 모바일 롱프레스 관리 시스템 === */
         let guestbookData = JSON.parse(localStorage.getItem('wedding_guestbook')) || [
             {id: 1, name: "상헌", message: "두 분 결혼을 진심으로 축하드립니다!! 멋지게 사세요!", date: "2026.06.01"},
             {id: 2, name: "지은", message: "아름다운 세상에서 평생 재미있게 행복하시길 축하해요!", date: "2026.06.02"}
@@ -642,7 +710,7 @@
                     <div class="guestbook-text">${item.message.replace(/\n/g, '<br>')}</div>
                 `;
 
-                // 화면엔 노출을 숨겼으나 관리 편의를 위한 히든 롱프레스 트리거 유지
+                // 히든 롱프레스 트리거 유지
                 const startPress = () => { pressTimer = setTimeout(() => { openDeleteModal(item.id); }, 800); };
                 const cancelPress = () => { clearTimeout(pressTimer); };
 
