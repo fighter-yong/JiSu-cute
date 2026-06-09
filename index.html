@@ -464,10 +464,10 @@
             </div>
             
             <div class="gallery-grid">
-                <div class="gallery-item col-3" onclick="openLightbox(0)"><img src="photo1.jpg" alt="사진1"></div>
+                <div class="gallery-item col-3" onclick="openLightbox(0)"><img src="photo1.JPG" alt="사진1"></div>
                 <div class="gallery-item col-3" onclick="openLightbox(1)"><img src="photo2.jpg" alt="사진2"></div>
                 <div class="gallery-item col-3" onclick="openLightbox(2)"><img src="photo3.JPG" alt="사진3"></div>
-                <div class="gallery-item col-3" onclick="openLightbox(3)"><img src="photo4.jpg" alt="사진4"></div>
+                <div class="gallery-item col-3" onclick="openLightbox(3)"><img src="photo4.JPG" alt="사진4"></div>
                 <div class="gallery-item col-3" onclick="openLightbox(4)"><img src="photo5.jpg" alt="사진5"></div>
                 <div class="gallery-item col-3" onclick="openLightbox(5)"><img src="photo6.jpg" alt="사진6"></div>
                 <div class="gallery-item col-3" onclick="openLightbox(6)"><img src="photo7.jpg" alt="사진7"></div>
@@ -500,13 +500,13 @@
             <div style="font-size: 0.9rem; color: #111111; margin-bottom: 3px; font-weight: bold;">W웨딩 국민연금 웨딩홀 1층 컨벤션 홀</div>
             <div style="font-size: 0.8rem; color: #666666; margin-bottom: 15px;">주소 : 부산광역시 연제구 중앙대로 1000, 1층</div>
             
-            <a href="https://map.naver.com/v5/entry/place/12028881" target="_blank" class="map-wrapper">
+            <a href="https://map.naver.com/p/entry/place/11881122?c=16.31,0,0,0,dh&placePath=/home?from=map&fromPanelNum=1&additionalHeight=76&timestamp=202606092159&locale=ko&svcName=map_pcv5" target="_blank" class="map-wrapper">
                 <img src="약도.jpg" alt="W웨딩 국민연금 웨딩홀 약도">
             </a>
             
             <div class="navi-buttons">
                 <a href="tmap://search?name=W웨딩 국민연금웨딩홀" class="navi-btn btn-tmap">TMAP 안내</a>
-                <a href="kakaonavi://search?q=W웨딩 국민연금웨딩홀" class="navi-btn btn-kakao">카카오내비</a>
+                <a href="kakaonavi://search?q=W웨딩 국민연금 웨딩홀" class="navi-btn btn-kakao">카카오내비</a>
                 <a href="nmap://search?query=W웨딩%20국민연금웨딩홀&appname=github.io" class="navi-btn btn-naver">네이버지도</a>
             </div>
         </section>
@@ -583,14 +583,12 @@
         /* === 1. 고도화된 BGM 컨트롤 및 모바일 인터랙션 자동재생 제어 === */
         const audio = document.getElementById('weddingBgm');
         const btn = document.getElementById('bgmToggleBtn');
-        let isUserPaused = false; // 사용자가 수동으로 껐는지 여부를 추적
+        let isUserPaused = false; 
 
-        // 브라우저 정책 우회용 자동재생 함수
         function tryAutoplay() {
             if (!isUserPaused && audio.paused) {
                 audio.play().then(() => {
                     btn.innerHTML = "<span>■ BGM 끄기</span>";
-                    // 성공적으로 자동재생되면 리스너들을 모두 제거하여 과부하 방지
                     removeAutoplayListeners();
                 }).catch(err => {
                     console.log("브라우저가 아직 상호작용을 대기 중입니다.");
@@ -604,19 +602,16 @@
             document.removeEventListener('scroll', tryAutoplay);
         }
 
-        // 페이지 진입 즉시 실행 가능한 환경이면 재생 시도
         window.addEventListener('DOMContentLoaded', () => {
             audio.play().then(() => {
                 btn.innerHTML = "<span>■ BGM 끄기</span>";
             }).catch(() => {
-                // 상호작용 차단 시 터치, 스크롤, 클릭하는 순간 바로 재생 트리거 바인딩
                 document.addEventListener('click', tryAutoplay);
                 document.addEventListener('touchstart', tryAutoplay);
                 document.addEventListener('scroll', tryAutoplay);
             });
         });
 
-        // 수동 버튼 토글 인터페이스 로직 개편
         function toggleBgm() {
             if (audio.paused) {
                 isUserPaused = false;
@@ -626,14 +621,14 @@
                 isUserPaused = true;
                 audio.pause();
                 btn.innerHTML = "<span>▶ BGM 켜기</span>";
-                removeAutoplayListeners(); // 사용자가 명확하게 껐으므로 자동재생 리스너도 제거
+                removeAutoplayListeners(); 
             }
         }
 
         /* === 2. 라이트박스 뷰어 및 스위핑 + 모바일 멀티 터치 줌 인터랙션 기능 === */
         let activeImgIdx = 0;
         const galleryImages = [
-            'photo1.jpg', 'photo2.jpg', 'photo3.JPG', 'photo4.jpg', 'photo5.jpg',
+            'photo1.JPG', 'photo2.jpg', 'photo3.JPG', 'photo4.JPG', 'photo5.jpg',
             'photo6.jpg', 'photo7.jpg', 'photo8.jpg', 'photo9.jpg', 'photo10.jpg',
             'photo11.jpg', 'photo12.jpg', 'photo13.JPG', 'photo14.jpg', 'photo15.jpg',
             'photo16.jpg', 'photo17.jpg', 'photo18.jpg', 'photo19.jpg'
