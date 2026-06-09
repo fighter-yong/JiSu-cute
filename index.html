@@ -178,7 +178,7 @@
         }
         .lightbox img {
             max-width: 95%;
-            max-height: 80%;
+            max-height: 85%; /* 하단 문구가 삭제되어 세로 최대 높이 가용 수치 상향 조절 */
             object-fit: contain;
             user-select: none;
             -webkit-user-drag: none;
@@ -193,14 +193,6 @@
             cursor: pointer;
             padding: 10px;
             z-index: 10001;
-        }
-        .lightbox-hint {
-            position: absolute;
-            bottom: 30px;
-            color: rgba(255,255,255,0.4);
-            font-size: 0.75rem;
-            letter-spacing: 1px;
-            pointer-events: none;
         }
 
         /* 4. 오시는 길 섹션 */
@@ -451,9 +443,9 @@
                 축복해 주셔서 감사합니다.
             </div>
             <div class="names-box">
-                <span>지수</span> 
+                <span>용욱</span> 
                 <img src="leaf.png" alt="🍃" class="leaf-img">
-                <span>용욱</span>
+                <span>지수</span>
             </div>
         </section>
 
@@ -491,7 +483,6 @@
             <span class="lightbox-close" onclick="event.stopPropagation(); closeLightbox();">&times;</span>
             <div class="lightbox-content-wrapper" id="lightboxWrapper">
                 <img id="lightboxImg" src="" alt="확대" onclick="event.stopPropagation();">
-                <div class="lightbox-hint">◀ 좌우 스위핑 및 두 손가락 확대 조절 가능 ▶</div>
             </div>
         </div>
 
@@ -520,15 +511,15 @@
                 <div class="acc-group">
                     <div class="acc-group-title">신랑 측</div>
                     <div class="acc-row">
-                        <span>혼주 : 이기주<br><small style="color:#777;">부산은행 057-12-096448-4</small></span>
+                        <span>혼주 : 이기주<br><small style="color:#777;">부산은행 057-12-096448-4 (이기주)</small></span>
                         <button class="copy-btn" onclick="copyAccount('057120964484')">계좌 복사</button>
                     </div>
                     <div class="acc-row">
-                        <span>혼주 : 윤미경<br><small style="color:#777;">부산은행 057-12-050602-9</small></span>
+                        <span>혼주 : 윤미경<br><small style="color:#777;">부산은행 057-12-050602-9 (윤미경)</small></span>
                         <button class="copy-btn" onclick="copyAccount('057120506029')">계좌 복사</button>
                     </div>
                     <div class="acc-row">
-                        <span>신랑 : 이용욱<br><small style="color:#777;">부산은행 057-12-0945566</small></span>
+                        <span>신랑 : 이용욱<br><small style="color:#777;">부산은행 057-12-094556-6</small></span>
                         <button class="copy-btn" onclick="copyAccount('057120945566')">계좌 복사</button>
                     </div>
                 </div>
@@ -573,7 +564,7 @@
         <section class="footer-section">
             <div class="footer-text">
                 당신의 가정이 언제나 행복하시기를 소망하며<br>
-                <strong style="font-size:1.15rem;">용욱 ㆍ 지수</strong> 올림
+                <strong style="font-size:1.15rem;">지수 ㆍ 용욱</strong> 올림
             </div>
         </section>
 
@@ -627,6 +618,7 @@
 
         /* === 2. 라이트박스 뷰어 및 스위핑 + 모바일 멀티 터치 줌 인터랙션 기능 === */
         let activeImgIdx = 0;
+        // 배열 데이터의 파일명 확장자도 조건식에 대응하여 수정 매핑 완료
         const galleryImages = [
             'photo1.JPG', 'photo2.jpg', 'photo3.JPG', 'photo4.JPG', 'photo5.jpg',
             'photo6.jpg', 'photo7.jpg', 'photo8.jpg', 'photo9.jpg', 'photo10.jpg',
