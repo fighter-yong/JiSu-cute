@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>우리의 결혼식에 초대합니다</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Playfair+Display:ital,wght@1,400&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Gowun+Batang:wght@400;700&display=swap">
     
     <style>
         /* 전체 기본 스타일 */
@@ -24,26 +24,29 @@
             background-color: #FDFBF7;
             box-shadow: 0 0 20px rgba(0,0,0,0.05);
             position: relative;
-            overflow: hidden;
         }
 
         section {
-            padding: 50px 20px;
+            padding: 45px 20px;
             border-bottom: 1px solid #F2EFE9;
+        }
+
+        /* [유쾌한 글씨체 적용] */
+        .funny-font {
+            font-family: 'Gamja Flower', cursive;
         }
 
         /* 1. 메인 섹션 */
         .main-section {
             padding-top: 50px;
-            padding-bottom: 30px;
+            padding-bottom: 20px;
         }
         .main-title {
-            font-size: 1.35rem;
-            line-height: 1.6;
-            color: #333333;
+            font-size: 1.8rem; /* 감자꽃체 특성에 맞춰 크기를 키움 */
+            line-height: 1.4;
+            color: #222222;
             margin-bottom: 35px;
-            font-weight: 700;
-            letter-spacing: -0.5px;
+            font-weight: normal;
         }
         .photo-container {
             width: 100%;
@@ -58,31 +61,37 @@
             position: absolute;
             bottom: 10px;
             right: 15px;
-            font-family: 'Playfair Display', serif;
             font-size: 0.75rem;
-            color: rgba(255, 255, 255, 0.85);
+            color: rgba(255, 255, 255, 0.9);
             font-style: italic;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
         }
 
-        /* BGM 버튼 스타일 */
-        .bgm-container {
-            margin-top: 15px;
-            text-align: right;
-            padding: 0 20px;
+        /* BGM 버튼 정중앙 배치 */
+        .bgm-center-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0 10px 0;
+            width: 100%;
         }
         .bgm-btn {
-            background: none;
+            background-color: #FFFFFF;
             border: 1px solid #C2B39E;
-            padding: 6px 12px;
-            font-size: 0.8rem;
+            padding: 8px 20px;
+            font-size: 0.85rem;
             border-radius: 20px;
-            color: #665A4E;
+            color: #554A3C;
             cursor: pointer;
             font-family: 'Gowun Batang', serif;
             display: inline-flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+            transition: all 0.2s;
+        }
+        .bgm-btn:active {
+            background-color: #F5F2EC;
         }
 
         /* 2. 인사말 섹션 */
@@ -90,95 +99,86 @@
             background-color: #FBF9F3; 
         }
         .intro-text {
-            font-size: 0.95rem;
+            font-size: 1.05rem;
             line-height: 2.2;
-            color: #444444;
+            color: #333333;
             margin-bottom: 35px;
         }
         .names {
-            font-size: 1.15rem;
-            letter-spacing: 2px;
-            font-weight: 700;
+            font-size: 1.3rem;
+            letter-spacing: 1px;
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
         }
-        .flower-svg {
-            width: 18px;
-            height: 18px;
-            fill: #E29B9B;
+        /* 풀 모양 SVG 아이콘 */
+        .leaf-svg {
+            width: 22px;
+            height: 22px;
+            fill: #8FA48B;
             vertical-align: middle;
         }
 
-        /* 3. 사진첩 섹션 (슬라이더 방식) */
-        .gallery-container {
-            position: relative;
-            width: 100%;
-            overflow: hidden;
+        /* 3. 사진첩 섹션 (5행 3열 격자배치) */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3열 고정 */
+            gap: 6px; /* 사진 사이 간격 */
             margin-top: 20px;
         }
-        .gallery-slider {
-            display: flex;
-            transition: transform 0.3s ease-in-out;
+        .gallery-item {
             width: 100%;
-        }
-        .gallery-slide {
-            min-width: 100%;
-            box-sizing: border-box;
-        }
-        .gallery-slide img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        .gallery-nav {
-            position: absolute;
-            top: 50%;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            transform: translateY(-50%);
-            pointer-events: none;
-        }
-        .gallery-btn {
-            background: rgba(0,0,0,0.2);
-            color: #fff;
-            border: none;
-            padding: 10px 15px;
+            aspect-ratio: 1 / 1; /* 사진을 정사각형으로 통일해 균형감 유지 */
+            overflow: hidden;
             cursor: pointer;
-            pointer-events: auto;
-            font-size: 1.2rem;
+            border-radius: 2px;
         }
-        .gallery-dots {
-            display: flex;
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* 프레임에 꽉 차게 맵핑 */
+            transition: transform 0.2s;
+        }
+        .gallery-item img:active {
+            transform: scale(0.95);
+        }
+
+        /* 사진 크게 보기 라이트박스 팝업 */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 9999;
             justify-content: center;
-            gap: 5px;
-            margin-top: 15px;
-            flex-wrap: wrap;
-            padding: 0 10px;
+            align-items: center;
         }
-        .dot {
-            width: 7px;
-            height: 7px;
-            background-color: #D6CFC7;
-            border-radius: 50%;
+        .lightbox img {
+            max-width: 95%;
+            max-height: 85%;
+            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 20px; right: 20px;
+            color: #FFFFFF;
+            font-size: 2rem;
             cursor: pointer;
-        }
-        .dot.active {
-            background-color: #6E7F6A;
+            padding: 10px;
         }
 
         /* 4. 오시는 길 섹션 */
-        .map-section .map-link {
-            display: block;
+        .map-wrapper {
             width: 100%;
-            margin: 20px auto;
-        }
-        .map-section .map-link img {
-            width: 100%;
+            margin: 20px 0;
             border: 1px solid #EAE6DF;
+            background-color: #FFFFFF;
             box-sizing: border-box;
+        }
+        .map-wrapper img {
+            width: 100%;
+            display: block;
         }
         .navi-buttons {
             display: grid;
@@ -188,7 +188,7 @@
         }
         .navi-btn {
             display: block;
-            padding: 10px 0;
+            padding: 11px 0;
             font-size: 0.8rem;
             color: #FFFFFF;
             text-decoration: none;
@@ -211,7 +211,6 @@
             cursor: pointer;
             border-radius: 4px;
             font-weight: bold;
-            letter-spacing: 1px;
         }
         .acc-content {
             max-height: 0;
@@ -274,10 +273,6 @@
             cursor: pointer;
             font-weight: bold;
             font-family: 'Gowun Batang', serif;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
         }
         .guestbook-list {
             text-align: left;
@@ -287,6 +282,12 @@
             padding: 12px 5px;
             border-bottom: 1px solid #F2EFE9;
             font-size: 0.85rem;
+            cursor: pointer;
+            -webkit-user-select: none; /* 롱프레스 시 텍스트 블록 지정 방지 */
+            user-select: none;
+        }
+        .guestbook-item:active {
+            background-color: #F5F2EB;
         }
         .guestbook-meta {
             display: flex;
@@ -316,6 +317,47 @@
             border-bottom: 2px solid #6E7F6A;
         }
 
+        /* 커스텀 삭제 팝업 모달 창 */
+        .delete-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+        }
+        .delete-modal-content {
+            background-color: #FFFFFF;
+            padding: 25px 20px;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 320px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+        .delete-modal-text {
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .delete-modal-btns {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+        .modal-btn {
+            padding: 8px 24px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border: none;
+            font-family: 'Gowun Batang', serif;
+            font-weight: bold;
+        }
+        .btn-yes { background-color: #D96B6B; color: white; }
+        .btn-no { background-color: #E2DDD5; color: #444; }
+
         /* 7. 마무리 섹션 */
         .footer-section {
             background-color: #F4F1EA;
@@ -333,10 +375,10 @@
 
     <div class="container">
         
-        <audio id="weddingBgm" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+        <audio id="weddingBgm" loop src="wedding-bgm.mp3.m4a"></audio>
 
-        <section class="main-section" style="padding-top:50px; padding-bottom:0px;">
-            <div class="main-title">
+        <section class="main-section">
+            <div class="main-title funny-font">
                 우리 결혼식에<br>당신을 초대하고 싶습니다.
             </div>
             <div class="photo-container">
@@ -345,7 +387,7 @@
             </div>
         </section>
 
-        <div class="bgm-container">
+        <div class="bgm-center-container">
             <button class="bgm-btn" id="bgmToggleBtn" onclick="toggleBgm()">
                 <span>▶ BGM 재생</span>
             </button>
@@ -359,10 +401,10 @@
                 평생 재미있게 살고 싶습니다.<br>
                 축복해 주셔서 감사합니다.
             </div>
-            <div class="names">
+            <div class="names funny-font">
                 지수 
-                <svg class="flower-svg" viewBox="0 0 24 24">
-                    <path d="M12,2A3,3 0 0,1 15,5V6.2C16.89,6.7 18,8.5 18,10.5C18,11.72 17.56,12.83 16.83,13.7L19.3,16.17C19.7,15.42 20,14.5 20,13.5A3,3 0 0,1 23,10.5A3,3 0 0,1 20,13.5C20,14.5 19.7,15.42 19.3,16.17L21.41,18.29L19.99,19.71L17.88,17.6C17.13,18 16.2,18.3 15.2,18.3C13.2,18.3 11.4,17.2 10.9,15.31H12A3,3 0 0,1 15,18.3C16,18.3 16.92,18 17.67,17.43L14.88,14.64C14,15.17 13,15.5 11.9,15.5C9.5,15.5 7.5,13.5 7.5,11.1C7.5,10.6 7.6,10.12 7.78,9.67L4.24,6.13L5.66,4.71L9.2,8.25C9.65,8.07 10.13,7.97 10.63,7.97C11.73,7.97 12.72,8.39 13.47,9.08L14.11,8.44V5A3,3 0 0,1 12,2M12,4A1,1 0 0,0 11,5V7.61C11.39,7.74 11.76,7.92 12.11,8.14L12.8,7.45V5A1,1 0 0,0 12,4M10.63,9.97C10,9.97 9.5,10.47 9.5,11.1C9.5,11.73 10,12.22 10.63,12.22C11.26,12.22 11.75,11.73 11.75,11.1C11.75,10.47 11.26,9.97 10.63,9.97Z"/>
+                <svg class="leaf-svg" viewBox="0 0 24 24">
+                    <path d="M17,8C15.21,8 13.54,8.69 12.27,9.84L12.5,8H14V6H11V8C10.53,8.04 10.07,8.11 9.62,8.23L7.71,6.32L6.29,7.74L8.47,9.92C7.03,10.77 5.83,12 5.04,13.5L3.13,11.59L1.71,13.01L3.9,15.2C3.12,16.94 3,18.84 3.58,20.67C3.69,21 4,21.19 4.31,21.1C6.14,20.5 8.05,20.4 9.79,19.61L12,21.82L13.41,20.4L11.5,18.49C13,17.7 14.22,16.5 15.07,15.06L17.24,17.24L18.66,15.82L16.75,13.91C16.88,13.46 16.95,13 17,12.5H19V9.5H17V8M15,12.5C15,13.92 14.22,15.21 13.04,15.93L9.67,12.56C11,10.94 13.06,10 15,10V12.5M6,17.5C5.46,15.54 6.4,13.44 8.03,12.12L11.4,15.47C10.1,17.1 8,18 6,17.5Z"/>
                 </svg>
                 용욱
             </div>
@@ -370,40 +412,39 @@
 
         <section>
             <div style="font-size: 1.05rem; margin-bottom: 15px; font-weight: bold;">사진첩</div>
-            <div class="gallery-container">
-                <div class="gallery-slider" id="slider">
-                    <div class="gallery-slide"><img src="photo1.jpg" alt="사진1"></div>
-                    <div class="gallery-slide"><img src="photo2.jpg" alt="사진2"></div>
-                    <div class="gallery-slide"><img src="photo3.jpg" alt="사진3"></div>
-                    <div class="gallery-slide"><img src="photo4.jpg" alt="사진4"></div>
-                    <div class="gallery-slide"><img src="photo5.jpg" alt="사진5"></div>
-                    <div class="gallery-slide"><img src="photo6.jpg" alt="사진6"></div>
-                    <div class="gallery-slide"><img src="photo7.jpg" alt="사진7"></div>
-                    <div class="gallery-slide"><img src="photo8.jpg" alt="사진8"></div>
-                    <div class="gallery-slide"><img src="photo9.jpg" alt="사진9"></div>
-                    <div class="gallery-slide"><img src="photo10.jpg" alt="사진10"></div>
-                    <div class="gallery-slide"><img src="photo11.jpg" alt="사진11"></div>
-                    <div class="gallery-slide"><img src="photo12.jpg" alt="사진12"></div>
-                    <div class="gallery-slide"><img src="photo13.jpg" alt="사진13"></div>
-                    <div class="gallery-slide"><img src="photo14.jpg" alt="사진14"></div>
-                    <div class="gallery-slide"><img src="photo15.jpg" alt="사진15"></div>
-                </div>
-                <div class="gallery-nav">
-                    <button class="gallery-btn" onclick="moveSlide(-1)">&#10094;</button>
-                    <button class="gallery-btn" onclick="moveSlide(1)">&#10095;</button>
-                </div>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item" onclick="openLightbox('photo1.jpg')"><img src="photo1.jpg" alt="사진1"></div>
+                <div class="gallery-item" onclick="openLightbox('photo2.jpg')"><img src="photo2.jpg" alt="사진2"></div>
+                <div class="gallery-item" onclick="openLightbox('photo3.jpg')"><img src="photo3.jpg" alt="사진3"></div>
+                <div class="gallery-item" onclick="openLightbox('photo4.jpg')"><img src="photo4.jpg" alt="사진4"></div>
+                <div class="gallery-item" onclick="openLightbox('photo5.jpg')"><img src="photo5.jpg" alt="사진5"></div>
+                <div class="gallery-item" onclick="openLightbox('photo6.jpg')"><img src="photo6.jpg" alt="사진6"></div>
+                <div class="gallery-item" onclick="openLightbox('photo7.jpg')"><img src="photo7.jpg" alt="사진7"></div>
+                <div class="gallery-item" onclick="openLightbox('photo8.jpg')"><img src="photo8.jpg" alt="사진8"></div>
+                <div class="gallery-item" onclick="openLightbox('photo9.jpg')"><img src="photo9.jpg" alt="사진9"></div>
+                <div class="gallery-item" onclick="openLightbox('photo10.jpg')"><img src="photo10.jpg" alt="사진10"></div>
+                <div class="gallery-item" onclick="openLightbox('photo11.jpg')"><img src="photo11.jpg" alt="사진11"></div>
+                <div class="gallery-item" onclick="openLightbox('photo12.jpg')"><img src="photo12.jpg" alt="사진12"></div>
+                <div class="gallery-item" onclick="openLightbox('photo13.jpg')"><img src="photo13.jpg" alt="사진13"></div>
+                <div class="gallery-item" onclick="openLightbox('photo14.jpg')"><img src="photo14.jpg" alt="사진14"></div>
+                <div class="gallery-item" onclick="openLightbox('photo15.jpg')"><img src="photo15.jpg" alt="사진15"></div>
             </div>
-            <div class="gallery-dots" id="dotsContainer"></div>
         </section>
+
+        <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+            <span class="lightbox-close">&times;</span>
+            <img id="lightboxImg" src="" alt="확대 이미지">
+        </div>
 
         <section class="map-section">
             <div style="font-size: 1.05rem; margin-bottom: 5px; font-weight: bold;">오시는 길</div>
             <div style="font-size: 0.9rem; color: #111111; margin-bottom: 3px; font-weight: bold;">W웨딩 국민연금 웨딩홀 1층 컨벤션 홀</div>
             <div style="font-size: 0.8rem; color: #666666; margin-bottom: 15px;">주소 : 부산광역시 연제구 중앙대로 1000, 1층</div>
             
-            <a href="https://map.naver.com/v5/entry/place/12028881" class="map-link" target="_blank">
-                <img src="wedding-map.png" alt="클릭하시면 네이버 지도로 연결됩니다">
-            </a>
+            <div class="map-wrapper">
+                <img src="wedding-map.png" alt="W웨딩 국민연금 웨딩홀 약도">
+            </div>
             
             <div class="navi-buttons">
                 <a href="tmap://search?name=W웨딩 국민연금웨딩홀" class="navi-btn btn-tmap">TMAP 안내</a>
@@ -442,38 +483,44 @@
         </section>
 
         <section>
-            <div style="font-size: 1.05rem; margin-bottom: 15px; font-weight: bold;">방명록</div>
+            <div style="font-size: 1.05rem; margin-bottom: 5px; font-weight: bold;">방명록</div>
+            <div style="font-size: 0.75rem; color:#A49B8F; margin-bottom: 15px;">※ 작성된 글을 길게 누르면 삭제할 수 있습니다.</div>
             <div class="guestbook-form">
                 <input type="text" id="gbName" placeholder="이름을 입력해 주세요." required>
                 <textarea id="gbMessage" placeholder="축하 메시지를 남겨주세요." required></textarea>
-                <button class="submit-btn" onclick="addMessage()">
-                    <span>✉ 등록</span>
-                </button>
+                <button class="submit-btn" onclick="addMessage()">✉ 등록</button>
             </div>
 
-            <div class="guestbook-list" id="guestbookList">
-                </div>
-            
-            <div class="pagination" id="pagination">
-                </div>
+            <div class="guestbook-list" id="guestbookList"></div>
+            <div class="pagination" id="pagination"></div>
         </section>
+
+        <div id="deleteModal" class="delete-modal">
+            <div class="delete-modal-content">
+                <div class="delete-modal-text">이 방명록 게시물을 삭제하시겠습니까?</div>
+                <div class="delete-modal-btns">
+                    <button class="modal-btn btn-yes" onclick="confirmDelete()">네</button>
+                    <button class="modal-btn btn-no" onclick="closeDeleteModal()">아니오</button>
+                </div>
+            </div>
+        </div>
 
         <section class="footer-section">
             <div class="footer-text">
                 당신의 가정이 언제나 행복하시기를 소망하며<br>
-                <strong>용욱 ㆍ 지수</strong> 올림
+                <strong class="funny-font" style="font-size:1.15rem;">용욱 ㆍ 지수</strong> 올림
             </div>
         </section>
 
     </div>
 
     <script>
-        /* === 1. BGM 제어 기능 === */
+        /* === 1. BGM 컨트롤 스크립트 === */
         function toggleBgm() {
             const audio = document.getElementById('weddingBgm');
             const btn = document.getElementById('bgmToggleBtn');
             if (audio.paused) {
-                audio.play().catch(e => alert("브라우저 보안 정책상 사용자 상호작용 후 재생이 완벽히 지원됩니다."));
+                audio.play().catch(e => alert("음악 재생은 브라우저 정책상 터치 후 정상 동작합니다."));
                 btn.innerHTML = "<span>■ BGM 멈춤</span>";
             } else {
                 audio.pause();
@@ -481,35 +528,13 @@
             }
         }
 
-        /* === 2. 사진첩 슬라이더 (15장) === */
-        let currentSlide = 0;
-        const totalSlides = 15;
-        const slider = document.getElementById('slider');
-        const dotsContainer = document.getElementById('dotsContainer');
-
-        // 하단 인디케이터 점(dot) 생성
-        for(let i=0; i<totalSlides; i++) {
-            const dot = document.createElement('div');
-            dot.classList.add('dot');
-            if(i === 0) dot.classList.add('active');
-            dot.addEventListener('click', () => { currentSlide = i; updateSlide(); });
-            dotsContainer.appendChild(dot);
+        /* === 2. 사진첩 확대/닫기 (라이트박스) === */
+        function openLightbox(imgSrc) {
+            document.getElementById('lightboxImg').src = imgSrc;
+            document.getElementById('lightbox').style.display = 'flex';
         }
-
-        function moveSlide(direction) {
-            currentSlide += direction;
-            if (currentSlide >= totalSlides) currentSlide = 0;
-            if (currentSlide < 0) currentSlide = totalSlides - 1;
-            updateSlide();
-        }
-
-        function updateSlide() {
-            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
-            const dots = document.querySelectorAll('.dot');
-            dots.forEach((dot, idx) => {
-                if(idx === currentSlide) dot.classList.add('active');
-                else dot.classList.remove('active');
-            });
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
         }
 
         /* === 3. 축복 계좌 아코디언 토글 === */
@@ -522,12 +547,11 @@
             }
         }
 
-        /* === 4. 계좌번호 복사 클립보드 기능 === */
+        /* === 4. 클립보드 계좌 복사 프로세스 === */
         function copyAccount(accountNumber) {
             navigator.clipboard.writeText(accountNumber).then(() => {
                 alert("계좌번호가 성공적으로 복사되었습니다.");
             }).catch(err => {
-                // 임시 fallback 기법 처리
                 const t = document.createElement("textarea");
                 document.body.appendChild(t);
                 t.value = accountNumber;
@@ -538,20 +562,23 @@
             });
         }
 
-        /* === 5. 로컬스토리지 연동 방명록 및 페이징 기능 (페이지 당 5개) === */
+        /* === 5. 데이터 영속화 방명록 페이징 및 모바일 롱프레스 삭제 엔진 === */
         let guestbookData = JSON.parse(localStorage.getItem('wedding_guestbook')) || [
-            {name: "상헌", message: "두 분 결혼을 진심으로 축하드립니다!! 멋지게 사세요!", date: "2026.06.01"},
-            {name: "지은", message: "아름다운 세상에서 평생 재미있게 행복하시길 축하해요!", date: "2026.06.02"}
+            {id: 1, name: "상헌", message: "두 분 결혼을 진심으로 축하드립니다!! 멋지게 사세요!", date: "2026.06.01"},
+            {id: 2, name: "지은", message: "아름다운 세상에서 평생 재미있게 행복하시길 축하해요!", date: "2026.06.02"}
         ];
+        
         let currentPage = 1;
         const itemsPerPage = 5;
+        let selectedIdForDelete = null;
+        let pressTimer = null;
 
         function renderGuestbook() {
             const listContainer = document.getElementById('guestbookList');
             listContainer.innerHTML = "";
             
-            // 최신 글이 맨 위로 오도록 역정렬
-            const reversedData = [...guestbookData].reverse();
+            // 최신 저장글이 역순 상단 정렬되도록 배열 복사 정렬
+            const reversedData = [...guestbookData].sort((a,b) => b.id - a.id);
             
             const startIndex = (currentPage - 1) * itemsPerPage;
             const endIndex = startIndex + itemsPerPage;
@@ -572,6 +599,28 @@
                     </div>
                     <div class="guestbook-text">${item.message.replace(/\n/g, '<br>')}</div>
                 `;
+
+                // --- 롱프레스 이벤트 바인딩 (모바일 및 PC 디바이스 통합 대응) ---
+                const startPress = () => {
+                    pressTimer = setTimeout(() => {
+                        openDeleteModal(item.id);
+                    }, 800); // 0.8초 이상 누르고 있을 때 감지
+                };
+
+                const cancelPress = () => {
+                    clearTimeout(pressTimer);
+                };
+
+                // 모바일 터치 이벤트 이벤트 바인딩
+                div.addEventListener('touchstart', startPress);
+                div.addEventListener('touchend', cancelPress);
+                div.addEventListener('touchmove', cancelPress);
+
+                // PC 마우스 드래그 이벤트 보완 바인딩
+                div.addEventListener('mousedown', startPress);
+                div.addEventListener('mouseup', cancelPress);
+                div.addEventListener('mouseleave', cancelPress);
+
                 listContainer.appendChild(div);
             });
 
@@ -611,6 +660,7 @@
             const dateStr = `${today.getFullYear()}.${String(today.getMonth()+1).padStart(2,'0')}.${String(today.getDate()).padStart(2,'0')}`;
 
             const newPost = {
+                id: Date.now(), // 고유 아이디 값 생성
                 name: nameInput.value.trim(),
                 message: msgInput.value.trim(),
                 date: dateStr
@@ -621,11 +671,39 @@
 
             nameInput.value = "";
             msgInput.value = "";
-            currentPage = 1; // 새 글 등록 시 첫 페이지로 이동
+            currentPage = 1;
             renderGuestbook();
         }
 
-        // 초기 화면 구동시 리스트 렌더링
+        /* === 6. 삭제 전용 모달 팝업 컨트롤 시스템 === */
+        function openDeleteModal(id) {
+            selectedIdForDelete = id;
+            document.getElementById('deleteModal').style.display = 'flex';
+        }
+
+        function closeDeleteModal() {
+            selectedIdForDelete = null;
+            document.getElementById('deleteModal').style.display = 'none';
+        }
+
+        function confirmDelete() {
+            if (selectedIdForDelete !== null) {
+                // 식별 아이디 필터 탈락 방식으로 로컬 어레이에서 삭제
+                guestbookData = guestbookData.filter(item => item.id !== selectedIdForDelete);
+                localStorage.setItem('wedding_guestbook', JSON.stringify(guestbookData));
+                
+                // 현재 페이지 글 개수가 다 지워졌을 시 전 페이지 회귀 계산
+                const totalPages = Math.ceil(guestbookData.length / itemsPerPage);
+                if (currentPage > totalPages && currentPage > 1) {
+                    currentPage = totalPages;
+                }
+                
+                closeDeleteModal();
+                renderGuestbook();
+            }
+        }
+
+        // 도큐먼트 로드 즉시 리스팅 초기화 실행
         window.onload = function() {
             renderGuestbook();
         };
