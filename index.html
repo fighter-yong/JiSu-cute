@@ -178,7 +178,7 @@
         }
         .lightbox img {
             max-width: 95%;
-            max-height: 85%; /* 하단 문구가 삭제되어 세로 최대 높이 가용 수치 상향 조절 */
+            max-height: 85%;
             object-fit: contain;
             user-select: none;
             -webkit-user-drag: none;
@@ -511,26 +511,26 @@
                 <div class="acc-group">
                     <div class="acc-group-title">신랑 측</div>
                     <div class="acc-row">
-                        <span>혼주 : 이기주<br><small style="color:#777;">부산은행 057-12-096448-4 (이기주)</small></span>
+                        <span>부산은행 057-12-096448-4 (이기주)</span>
                         <button class="copy-btn" onclick="copyAccount('057120964484')">계좌 복사</button>
                     </div>
                     <div class="acc-row">
-                        <span>혼주 : 윤미경<br><small style="color:#777;">부산은행 057-12-050602-9 (윤미경)</small></span>
+                        <span>부산은행 057-12-050602-9 (윤미경)</span>
                         <button class="copy-btn" onclick="copyAccount('057120506029')">계좌 복사</button>
                     </div>
                     <div class="acc-row">
-                        <span>신랑 : 이용욱<br><small style="color:#777;">부산은행 057-12-094556-6</small></span>
+                        <span>부산은행 057-12-094556-6 (이용욱)</span>
                         <button class="copy-btn" onclick="copyAccount('057120945566')">계좌 복사</button>
                     </div>
                 </div>
                 <div class="acc-group">
                     <div class="acc-group-title">신부 측</div>
                     <div class="acc-row">
-                        <span>혼주 : 강호성, 박성희<br><small style="color:#777;">우리은행 1002-453-995808 (강호성)</small></span>
+                        <span>우리은행 1002-453-995808 (강호성)</span>
                         <button class="copy-btn" onclick="copyAccount('1002453995808')">계좌 복사</button>
                     </div>
                     <div class="acc-row">
-                        <span>신부 : 강지수<br><small style="color:#777;">우리은행 1002-041-199939</small></span>
+                        <span>우리은행 1002-041-199939 (강지수)</span>
                         <button class="copy-btn" onclick="copyAccount('1002041199939')">계좌 복사</button>
                     </div>
                 </div>
@@ -571,7 +571,7 @@
     </div>
 
     <script>
-        /* === 1. 고도화된 BGM 컨트롤 및 모바일 인터랙션 자동재생 제어 === */
+        /* === 1. BGM 컨트롤 및 모바일 인터랙션 자동재생 제어 === */
         const audio = document.getElementById('weddingBgm');
         const btn = document.getElementById('bgmToggleBtn');
         let isUserPaused = false; 
@@ -618,7 +618,6 @@
 
         /* === 2. 라이트박스 뷰어 및 스위핑 + 모바일 멀티 터치 줌 인터랙션 기능 === */
         let activeImgIdx = 0;
-        // 배열 데이터의 파일명 확장자도 조건식에 대응하여 수정 매핑 완료
         const galleryImages = [
             'photo1.JPG', 'photo2.jpg', 'photo3.JPG', 'photo4.JPG', 'photo5.jpg',
             'photo6.jpg', 'photo7.jpg', 'photo8.jpg', 'photo9.jpg', 'photo10.jpg',
