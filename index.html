@@ -4,16 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>우리의 결혼식에 초대합니다</title>
-    <!-- 구글 폰트: 마루부리 세리프체와 손글씨 느낌의 나눔손글씨 사용 -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Maru+Buri:wght@300;400&family=Nanum+Pen+Script&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Playfair+Display:ital,wght@1,400&display=swap">
     
     <style>
-        /* 전체 기본 스타일 (한지 무드의 따뜻한 미색 배경) */
+        /* 전체 기본 스타일 */
         body {
             margin: 0;
             padding: 0;
             background-color: #FDFBF7; 
-            font-family: 'Maru+Buri', Georgia, serif;
+            font-family: 'Gowun Batang', Georgia, serif;
             color: #333333;
             text-align: center;
             -webkit-font-smoothing: antialiased;
@@ -23,195 +22,613 @@
             max-width: 450px; /* 스마트폰 화면 최대 폭 고정 */
             margin: 0 auto;
             background-color: #FDFBF7;
-            box-shadow: 0 0 20px rgba(0,0,0,0.02);
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
         }
 
         section {
             padding: 50px 20px;
+            border-bottom: 1px solid #F2EFE9;
         }
 
         /* 1. 메인 섹션 */
         .main-section {
-            padding-top: 60px;
+            padding-top: 50px;
+            padding-bottom: 30px;
         }
         .main-title {
-            font-family: 'Nanum Pen Script', cursive;
-            font-size: 1.8rem;
-            line-height: 1.5;
-            color: #555555;
-            margin-bottom: 30px;
+            font-size: 1.35rem;
+            line-height: 1.6;
+            color: #333333;
+            margin-bottom: 35px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
         }
-        .photo-frame {
-            width: 85%;
+        .photo-container {
+            width: 100%;
             margin: 0 auto;
-            border: 1px solid #EAE6DF;
-            padding: 8px;
-            background-color: #FFFFFF;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+            position: relative;
         }
-        .photo-frame img {
+        .photo-container img {
             width: 100%;
             display: block;
         }
         .credit {
+            position: absolute;
+            bottom: 10px;
+            right: 15px;
+            font-family: 'Playfair Display', serif;
             font-size: 0.75rem;
-            color: #888888;
-            margin-top: 12px;
+            color: rgba(255, 255, 255, 0.85);
             font-style: italic;
-            margin-bottom: 25px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
         }
 
-        /* BGM 버튼 디자인 정의 */
-        .bgm-button {
-            background: rgba(255, 255, 255, 0.9);
+        /* BGM 버튼 스타일 */
+        .bgm-container {
+            margin-top: 15px;
+            text-align: right;
+            padding: 0 20px;
+        }
+        .bgm-btn {
+            background: none;
             border: 1px solid #C2B39E;
-            padding: 8px 16px;
-            font-size: 0.75rem;
+            padding: 6px 12px;
+            font-size: 0.8rem;
             border-radius: 20px;
+            color: #665A4E;
             cursor: pointer;
-            font-family: inherit;
-            color: #555555;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            transition: all 0.2s;
+            font-family: 'Gowun Batang', serif;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
         }
 
         /* 2. 인사말 섹션 */
         .intro-section {
-            background-color: #F9F6F0; /* 약간 더 짙은 한지 톤 */
-            border-top: 1px solid #EAE6DF;
-            border-bottom: 1px solid #EAE6DF;
+            background-color: #FBF9F3; 
         }
         .intro-text {
             font-size: 0.95rem;
-            line-height: 2;
+            line-height: 2.2;
             color: #444444;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
         }
         .names {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             letter-spacing: 2px;
-            font-weight: 400;
+            font-weight: 700;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+        .flower-svg {
+            width: 18px;
+            height: 18px;
+            fill: #E29B9B;
+            vertical-align: middle;
         }
 
-        /* 3. 오시는 길 섹션 */
-        .map-section img {
-            width: 90%;
-            max-width: 350px;
-            margin: 20px auto;
-            border: 1px solid #EAE6DF;
+        /* 3. 사진첩 섹션 (슬라이더 방식) */
+        .gallery-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            margin-top: 20px;
         }
-        .map-btn {
-            display: inline-block;
-            background-color: #6E7F6A; /* 차분한 그린 톤 */
+        .gallery-slider {
+            display: flex;
+            transition: transform 0.3s ease-in-out;
+            width: 100%;
+        }
+        .gallery-slide {
+            min-width: 100%;
+            box-sizing: border-box;
+        }
+        .gallery-slide img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .gallery-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+        .gallery-btn {
+            background: rgba(0,0,0,0.2);
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            pointer-events: auto;
+            font-size: 1.2rem;
+        }
+        .gallery-dots {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+            padding: 0 10px;
+        }
+        .dot {
+            width: 7px;
+            height: 7px;
+            background-color: #D6CFC7;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .dot.active {
+            background-color: #6E7F6A;
+        }
+
+        /* 4. 오시는 길 섹션 */
+        .map-section .map-link {
+            display: block;
+            width: 100%;
+            margin: 20px auto;
+        }
+        .map-section .map-link img {
+            width: 100%;
+            border: 1px solid #EAE6DF;
+            box-sizing: border-box;
+        }
+        .navi-buttons {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-top: 15px;
+        }
+        .navi-btn {
+            display: block;
+            padding: 10px 0;
+            font-size: 0.8rem;
             color: #FFFFFF;
             text-decoration: none;
-            padding: 12px 30px;
-            font-size: 0.85rem;
             border-radius: 4px;
-            margin-top: 15px;
-            letter-spacing: 1px;
-            transition: background-color 0.2s;
+            font-weight: bold;
         }
-        .map-btn:hover {
-            background-color: #5A6A57;
+        .btn-tmap { background-color: #1F1F1F; }
+        .btn-kakao { background-color: #FFEB00; color: #3C1E1E; }
+        .btn-naver { background-color: #03C75A; }
+
+        /* 5. 마음 전하실 곳 섹션 */
+        .acc-btn {
+            background-color: #F4F1EA;
+            border: 1px solid #E4DFD5;
+            color: #554A3C;
+            width: 100%;
+            padding: 14px;
+            font-size: 0.95rem;
+            font-family: 'Gowun Batang', serif;
+            cursor: pointer;
+            border-radius: 4px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .acc-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background-color: #FAF8F5;
+            border-left: 1px solid #E4DFD5;
+            border-right: 1px solid #E4DFD5;
+        }
+        .acc-group {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #EFECE6;
+        }
+        .acc-group-title {
+            font-weight: bold;
+            font-size: 0.9rem;
+            color: #6E7F6A;
+            margin-bottom: 10px;
+        }
+        .acc-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+        }
+        .copy-btn {
+            background-color: #FFFFFF;
+            border: 1px solid #C2B39E;
+            padding: 3px 8px;
+            font-size: 0.75rem;
+            border-radius: 3px;
+            cursor: pointer;
+            font-family: 'Gowun Batang', serif;
         }
 
-        /* 4. 마음 전하실 곳 섹션 */
-        .bank-section {
-            padding-bottom: 80px;
+        /* 6. 방명록 섹션 */
+        .guestbook-form {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 20px;
         }
-        .flower-icon {
-            font-size: 1.2rem;
-            color: #C2B39E;
-            margin-bottom: 15px;
+        .guestbook-form input, .guestbook-form textarea {
+            padding: 10px;
+            border: 1px solid #E4DFD5;
+            border-radius: 4px;
+            font-family: 'Gowun Batang', serif;
+            font-size: 0.85rem;
+            background-color: #FCFAF7;
         }
-        .thankyou-text {
-            font-size: 0.9rem;
-            line-height: 1.8;
-            color: #666666;
+        .guestbook-form textarea { resize: none; height: 60px; }
+        .submit-btn {
+            background-color: #6E7F6A;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            font-family: 'Gowun Batang', serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        .guestbook-list {
+            text-align: left;
+            border-top: 1px solid #E4DFD5;
+        }
+        .guestbook-item {
+            padding: 12px 5px;
+            border-bottom: 1px solid #F2EFE9;
+            font-size: 0.85rem;
+        }
+        .guestbook-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #888888;
+            margin-bottom: 4px;
+            font-size: 0.8rem;
+        }
+        .guestbook-name { font-weight: bold; color: #555; }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .page-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: 'Gowun Batang', serif;
+            color: #888;
+            padding: 2px 6px;
+        }
+        .page-btn.active {
+            font-weight: bold;
+            color: #6E7F6A;
+            border-bottom: 2px solid #6E7F6A;
+        }
+
+        /* 7. 마무리 섹션 */
+        .footer-section {
+            background-color: #F4F1EA;
+            padding: 60px 20px;
+            border-bottom: none;
+        }
+        .footer-text {
+            font-size: 0.95rem;
+            line-height: 2.2;
+            color: #555555;
         }
     </style>
 </head>
 <body>
 
-    <!-- BGM 오디오 태그 (자동재생, 반복재생 설정) -->
-    <!-- ⚠️ 깃허브에 올릴 음악 파일명을 정확히 'wedding-bgm.mp3' 또는 'wedding-bgm.m4a' 등으로 맞추고 아래 src도 통일해 주세요 -->
-    <audio id="bgm" src="wedding-bgm.mp3.m4a" autoplay loop></audio>
-
     <div class="container">
         
-        <!-- [1면 연동] 메인 섹션 -->
-        <section class="main-section">
-            <div class="main-title">
-                우리의 결혼식에<br>당신을 초대하고 싶습니다.
-            </div>
-            <div class="photo-frame">
-                <!-- ⚠️ 깃허브에 올린 사진 파일명과 완벽히 일치해야 합니다 (대소문자 주의) -->
-                <img src="wedding-photo.jpg.JPG" alt="결혼식 스냅 사진">
-            </div>
-            <div class="credit">photographed by 상헌lee</div>
+        <audio id="weddingBgm" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
 
-            <!-- 음악 컨트롤 버튼 (하객들이 누르기 가장 좋은 메인 하단에 배치) -->
-            <button id="bgmBtn" class="bgm-button" onclick="toggleBgm()">🎵 BGM 재생 중</button>
+        <section class="main-section" style="padding-top:50px; padding-bottom:0px;">
+            <div class="main-title">
+                우리 결혼식에<br>당신을 초대하고 싶습니다.
+            </div>
+            <div class="photo-container">
+                <img src="wedding-photo.jpg" alt="결혼식 스냅 사진">
+                <div class="credit">Thanks to 상헌&지은lee</div>
+            </div>
         </section>
 
-        <!-- [2면 연동] 인사말 섹션 -->
+        <div class="bgm-container">
+            <button class="bgm-btn" id="bgmToggleBtn" onclick="toggleBgm()">
+                <span>▶ BGM 재생</span>
+            </button>
+        </div>
+
         <section class="intro-section">
             <div class="intro-text">
-                서로 다른 색으로 살아온 저희가<br>
-                이제 하나의 뜻으로 발을 맞추려 합니다.<br>
-                따뜻한 마음으로 곁에서 지켜봐 주시고<br>
-                앞날을 축복해 주시면 감사하겠습니다.
+                세상이 아름답길 원하는 남자와<br>
+                아름다운 세상을 살아가는 여자가<br>
+                결혼을 합니다.<br>
+                평생 재미있게 살고 싶습니다.<br>
+                축복해 주셔서 감사합니다.
             </div>
             <div class="names">
-                용욱 &nbsp;&middot;&nbsp; 지수
+                지수 
+                <svg class="flower-svg" viewBox="0 0 24 24">
+                    <path d="M12,2A3,3 0 0,1 15,5V6.2C16.89,6.7 18,8.5 18,10.5C18,11.72 17.56,12.83 16.83,13.7L19.3,16.17C19.7,15.42 20,14.5 20,13.5A3,3 0 0,1 23,10.5A3,3 0 0,1 20,13.5C20,14.5 19.7,15.42 19.3,16.17L21.41,18.29L19.99,19.71L17.88,17.6C17.13,18 16.2,18.3 15.2,18.3C13.2,18.3 11.4,17.2 10.9,15.31H12A3,3 0 0,1 15,18.3C16,18.3 16.92,18 17.67,17.43L14.88,14.64C14,15.17 13,15.5 11.9,15.5C9.5,15.5 7.5,13.5 7.5,11.1C7.5,10.6 7.6,10.12 7.78,9.67L4.24,6.13L5.66,4.71L9.2,8.25C9.65,8.07 10.13,7.97 10.63,7.97C11.73,7.97 12.72,8.39 13.47,9.08L14.11,8.44V5A3,3 0 0,1 12,2M12,4A1,1 0 0,0 11,5V7.61C11.39,7.74 11.76,7.92 12.11,8.14L12.8,7.45V5A1,1 0 0,0 12,4M10.63,9.97C10,9.97 9.5,10.47 9.5,11.1C9.5,11.73 10,12.22 10.63,12.22C11.26,12.22 11.75,11.73 11.75,11.1C11.75,10.47 11.26,9.97 10.63,9.97Z"/>
+                </svg>
+                용욱
             </div>
         </section>
 
-        <!-- [3면 연동] 오시는 길 섹션 -->
-        <section class="map-section">
-            <div style="font-size: 1.05rem; margin-bottom: 10px;">오시는 길</div>
-            <div style="font-size: 0.85rem; color: #777777;">W웨딩 국민연금홀 (부산 연제구 중앙대로 1000)</div>
-            
-            <!-- ⚠️ 깃허브에 올린 약도 이미지 파일명과 일치해야 합니다 -->
-            <img src="wedding-map.png.png" alt="W웨딩 국민연금홀 약도">
-            
-            <br>
-            <!-- 네이버 지도 바로가기 버튼 링크 -->
-            <a href="https://map.naver.com/v5/search/W%EC%9B%A8%EB%94%A9%20%EA%B5%AD%EB%AF%BC%EC%97%B0%EA%B8%88%ED%99%80" class="map-btn" target="_blank">
-                네이버 지도로 보기
-            </a>
+        <section>
+            <div style="font-size: 1.05rem; margin-bottom: 15px; font-weight: bold;">사진첩</div>
+            <div class="gallery-container">
+                <div class="gallery-slider" id="slider">
+                    <div class="gallery-slide"><img src="photo1.jpg" alt="사진1"></div>
+                    <div class="gallery-slide"><img src="photo2.jpg" alt="사진2"></div>
+                    <div class="gallery-slide"><img src="photo3.jpg" alt="사진3"></div>
+                    <div class="gallery-slide"><img src="photo4.jpg" alt="사진4"></div>
+                    <div class="gallery-slide"><img src="photo5.jpg" alt="사진5"></div>
+                    <div class="gallery-slide"><img src="photo6.jpg" alt="사진6"></div>
+                    <div class="gallery-slide"><img src="photo7.jpg" alt="사진7"></div>
+                    <div class="gallery-slide"><img src="photo8.jpg" alt="사진8"></div>
+                    <div class="gallery-slide"><img src="photo9.jpg" alt="사진9"></div>
+                    <div class="gallery-slide"><img src="photo10.jpg" alt="사진10"></div>
+                    <div class="gallery-slide"><img src="photo11.jpg" alt="사진11"></div>
+                    <div class="gallery-slide"><img src="photo12.jpg" alt="사진12"></div>
+                    <div class="gallery-slide"><img src="photo13.jpg" alt="사진13"></div>
+                    <div class="gallery-slide"><img src="photo14.jpg" alt="사진14"></div>
+                    <div class="gallery-slide"><img src="photo15.jpg" alt="사진15"></div>
+                </div>
+                <div class="gallery-nav">
+                    <button class="gallery-btn" onclick="moveSlide(-1)">&#10094;</button>
+                    <button class="gallery-btn" onclick="moveSlide(1)">&#10095;</button>
+                </div>
+            </div>
+            <div class="gallery-dots" id="dotsContainer"></div>
         </section>
 
-        <!-- [4면 연동] 마음 전하실 곳 섹션 -->
-        <section class="bank-section">
-            <div class="flower-icon">❀</div>
-            <div class="thankyou-text">
-                바쁜 걸음으로 저희의 시작을<br>
-                축하해 주셔서 진심으로 감사합니다.<br>
-                보내주신 따뜻한 마음을 늘 기억하며,<br>
-                가정에 건강과 행복이 가득하시기를 기원합니다.
+        <section class="map-section">
+            <div style="font-size: 1.05rem; margin-bottom: 5px; font-weight: bold;">오시는 길</div>
+            <div style="font-size: 0.9rem; color: #111111; margin-bottom: 3px; font-weight: bold;">W웨딩 국민연금 웨딩홀 1층 컨벤션 홀</div>
+            <div style="font-size: 0.8rem; color: #666666; margin-bottom: 15px;">주소 : 부산광역시 연제구 중앙대로 1000, 1층</div>
+            
+            <a href="https://map.naver.com/v5/entry/place/12028881" class="map-link" target="_blank">
+                <img src="wedding-map.png" alt="클릭하시면 네이버 지도로 연결됩니다">
+            </a>
+            
+            <div class="navi-buttons">
+                <a href="tmap://search?name=W웨딩 국민연금웨딩홀" class="navi-btn btn-tmap">TMAP 안내</a>
+                <a href="kakaonavi://search?q=W웨딩 국민연금웨딩홀" class="navi-btn btn-kakao">카카오내비</a>
+                <a href="nmap://search?query=W웨딩%20국민연금웨딩홀&appname=github.io" class="navi-btn btn-naver">네이버지도</a>
+            </div>
+        </section>
+
+        <section>
+            <button class="acc-btn" onclick="toggleAccordion()">❀ 축복의 마음 전하실 곳</button>
+            <div class="acc-content" id="accContent">
+                
+                <div class="acc-group">
+                    <div class="acc-group-title">신랑 측</div>
+                    <div class="acc-row">
+                        <span>혼주 : 이기주</span>
+                    </div>
+                    <div class="acc-row">
+                        <span>신랑 : 이용욱 <br><small style="color:#777;">부산은행 057-12-0945566</small></span>
+                        <button class="copy-btn" onclick="copyAccount('057120945566')">계좌 복사</button>
+                    </div>
+                </div>
+
+                <div class="acc-group">
+                    <div class="acc-group-title">신부 측</div>
+                    <div class="acc-row">
+                        <span>혼주 : 강호성 <br><small style="color:#777;">우리은행 1002-453-995808</small></span>
+                        <button class="copy-btn" onclick="copyAccount('1002453995808')">계좌 복사</button>
+                    </div>
+                    <div class="acc-row">
+                        <span>신부 : 강지수</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section>
+            <div style="font-size: 1.05rem; margin-bottom: 15px; font-weight: bold;">방명록</div>
+            <div class="guestbook-form">
+                <input type="text" id="gbName" placeholder="이름을 입력해 주세요." required>
+                <textarea id="gbMessage" placeholder="축하 메시지를 남겨주세요." required></textarea>
+                <button class="submit-btn" onclick="addMessage()">
+                    <span>✉ 등록</span>
+                </button>
+            </div>
+
+            <div class="guestbook-list" id="guestbookList">
+                </div>
+            
+            <div class="pagination" id="pagination">
+                </div>
+        </section>
+
+        <section class="footer-section">
+            <div class="footer-text">
+                당신의 가정이 언제나 행복하시기를 소망하며<br>
+                <strong>용욱 ㆍ 지수</strong> 올림
             </div>
         </section>
 
     </div>
 
-    <!-- 기능 제어 스크립트 (body 닫히기 직전 위치) -->
     <script>
-    function toggleBgm() {
-        var bgm = document.getElementById('bgm');
-        var btn = document.getElementById('bgmBtn');
-        
-        if (bgm.paused) {
-            bgm.play();
-            btn.innerText = '🎵 BGM 재생 중';
-            btn.style.opacity = '1';
-        } else {
-            bgm.pause();
-            btn.innerText = '🔇 BGM 꺼짐';
-            btn.style.opacity = '0.6';
+        /* === 1. BGM 제어 기능 === */
+        function toggleBgm() {
+            const audio = document.getElementById('weddingBgm');
+            const btn = document.getElementById('bgmToggleBtn');
+            if (audio.paused) {
+                audio.play().catch(e => alert("브라우저 보안 정책상 사용자 상호작용 후 재생이 완벽히 지원됩니다."));
+                btn.innerHTML = "<span>■ BGM 멈춤</span>";
+            } else {
+                audio.pause();
+                btn.innerHTML = "<span>▶ BGM 재생</span>";
+            }
         }
-    }
+
+        /* === 2. 사진첩 슬라이더 (15장) === */
+        let currentSlide = 0;
+        const totalSlides = 15;
+        const slider = document.getElementById('slider');
+        const dotsContainer = document.getElementById('dotsContainer');
+
+        // 하단 인디케이터 점(dot) 생성
+        for(let i=0; i<totalSlides; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if(i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => { currentSlide = i; updateSlide(); });
+            dotsContainer.appendChild(dot);
+        }
+
+        function moveSlide(direction) {
+            currentSlide += direction;
+            if (currentSlide >= totalSlides) currentSlide = 0;
+            if (currentSlide < 0) currentSlide = totalSlides - 1;
+            updateSlide();
+        }
+
+        function updateSlide() {
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, idx) => {
+                if(idx === currentSlide) dot.classList.add('active');
+                else dot.classList.remove('active');
+            });
+        }
+
+        /* === 3. 축복 계좌 아코디언 토글 === */
+        function toggleAccordion() {
+            const content = document.getElementById('accContent');
+            if (content.style.maxHeight && content.style.maxHeight !== "0px") {
+                content.style.maxHeight = "0px";
+            } else {
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
+        }
+
+        /* === 4. 계좌번호 복사 클립보드 기능 === */
+        function copyAccount(accountNumber) {
+            navigator.clipboard.writeText(accountNumber).then(() => {
+                alert("계좌번호가 성공적으로 복사되었습니다.");
+            }).catch(err => {
+                // 임시 fallback 기법 처리
+                const t = document.createElement("textarea");
+                document.body.appendChild(t);
+                t.value = accountNumber;
+                t.select();
+                document.execCommand('copy');
+                document.body.removeChild(t);
+                alert("계좌번호가 복사되었습니다.");
+            });
+        }
+
+        /* === 5. 로컬스토리지 연동 방명록 및 페이징 기능 (페이지 당 5개) === */
+        let guestbookData = JSON.parse(localStorage.getItem('wedding_guestbook')) || [
+            {name: "상헌", message: "두 분 결혼을 진심으로 축하드립니다!! 멋지게 사세요!", date: "2026.06.01"},
+            {name: "지은", message: "아름다운 세상에서 평생 재미있게 행복하시길 축하해요!", date: "2026.06.02"}
+        ];
+        let currentPage = 1;
+        const itemsPerPage = 5;
+
+        function renderGuestbook() {
+            const listContainer = document.getElementById('guestbookList');
+            listContainer.innerHTML = "";
+            
+            // 최신 글이 맨 위로 오도록 역정렬
+            const reversedData = [...guestbookData].reverse();
+            
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const paginatedItems = reversedData.slice(startIndex, endIndex);
+
+            if(paginatedItems.length === 0) {
+                listContainer.innerHTML = "<p style='text-align:center; color:#999; padding:20px 0;'>첫 축하의 한마디를 남겨주세요.</p>";
+                return;
+            }
+
+            paginatedItems.forEach(item => {
+                const div = document.createElement('div');
+                div.classList.add('guestbook-item');
+                div.innerHTML = `
+                    <div class="guestbook-meta">
+                        <span class="guestbook-name">${item.name}</span>
+                        <span>${item.date}</span>
+                    </div>
+                    <div class="guestbook-text">${item.message.replace(/\n/g, '<br>')}</div>
+                `;
+                listContainer.appendChild(div);
+            });
+
+            renderPagination(reversedData.length);
+        }
+
+        function renderPagination(totalItems) {
+            const pageContainer = document.getElementById('pagination');
+            pageContainer.innerHTML = "";
+            const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+            if(totalPages <= 1) return;
+
+            for(let i = 1; i <= totalPages; i++) {
+                const btn = document.createElement('button');
+                btn.classList.add('page-btn');
+                if(i === currentPage) btn.classList.add('active');
+                btn.innerText = i;
+                btn.addEventListener('click', () => {
+                    currentPage = i;
+                    renderGuestbook();
+                });
+                pageContainer.appendChild(btn);
+            }
+        }
+
+        function addMessage() {
+            const nameInput = document.getElementById('gbName');
+            const msgInput = document.getElementById('gbMessage');
+
+            if(!nameInput.value.trim() || !msgInput.value.trim()) {
+                alert("이름과 축하 메시지를 모두 입력해주세요.");
+                return;
+            }
+
+            const today = new Date();
+            const dateStr = `${today.getFullYear()}.${String(today.getMonth()+1).padStart(2,'0')}.${String(today.getDate()).padStart(2,'0')}`;
+
+            const newPost = {
+                name: nameInput.value.trim(),
+                message: msgInput.value.trim(),
+                date: dateStr
+            };
+
+            guestbookData.push(newPost);
+            localStorage.setItem('wedding_guestbook', JSON.stringify(guestbookData));
+
+            nameInput.value = "";
+            msgInput.value = "";
+            currentPage = 1; // 새 글 등록 시 첫 페이지로 이동
+            renderGuestbook();
+        }
+
+        // 초기 화면 구동시 리스트 렌더링
+        window.onload = function() {
+            renderGuestbook();
+        };
     </script>
 </body>
 </html>
