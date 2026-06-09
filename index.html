@@ -7,11 +7,20 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@300;400;700&display=swap">
     
     <style>
-        /* 전체 기본 스타일 */
+        /* === 전통 한지(Hanji) 질감 배경 무드 커스텀 디자인 === */
         body {
             margin: 0;
             padding: 0;
-            background-color: #FDFBF7; 
+            /* 은은한 한지 미색 베이스 바탕색 */
+            background-color: #FAF6EE; 
+            /* 섬유 결이 살아있는 미세 한지 격자 텍스처 패턴 매핑 */
+            background-image: 
+                radial-gradient(rgba(0,0,0,0.01) 15%, transparent 16%),
+                linear-gradient(0deg, rgba(240,232,218,0.4) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(240,232,218,0.4) 1px, transparent 1px);
+            background-size: 6px 6px, 14px 14px, 14px 14px;
+            /* 배경색과 패턴을 고급스럽게 융합시키는 블렌딩 기술 적용 */
+            background-blend-mode: multiply;
             font-family: 'Gowun Batang', Georgia, serif;
             color: #333333;
             text-align: center;
@@ -21,14 +30,20 @@
         .container {
             max-width: 450px; /* 스마트폰 화면 최대 폭 고정 */
             margin: 0 auto;
-            background-color: #FDFBF7;
-            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+            background-color: #FAF6EE;
+            background-image: 
+                radial-gradient(rgba(0,0,0,0.01) 15%, transparent 16%),
+                linear-gradient(0deg, rgba(240,232,218,0.4) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(240,232,218,0.4) 1px, transparent 1px);
+            background-size: 6px 6px, 14px 14px, 14px 14px;
+            background-blend-mode: multiply;
+            box-shadow: 0 0 25px rgba(0,0,0,0.06);
             position: relative;
         }
 
         section {
             padding: 45px 20px;
-            border-bottom: 1px solid #F2EFE9;
+            border-bottom: 1px solid #ECE4D5;
         }
 
         /* 1. 메인 섹션 */
@@ -93,7 +108,7 @@
 
         /* 2. 인사말 섹션 */
         .intro-section {
-            background-color: #FBF9F3; 
+            background-color: #F6F0E2; /* 약간 더 깊이감 있는 한지 무드 분리 */
         }
         .intro-text {
             font-size: 1.05rem;
@@ -199,7 +214,7 @@
         .map-wrapper {
             width: 100%;
             margin: 20px 0;
-            border: 1px solid #EAE6DF;
+            border: 1px solid #DCD4C4;
             background-color: #FFFFFF;
             box-sizing: border-box;
             display: block;
@@ -230,8 +245,8 @@
         /* 5. 마음 전하실 곳 섹션 */
         .acc-btn-box {
             width: 100%;
-            background-color: #F4F1EA;
-            border: 1px solid #E4DFD5;
+            background-color: #EFE8DA;
+            border: 1px solid #D3C9B5;
             border-radius: 4px;
             cursor: pointer;
             box-sizing: border-box;
@@ -251,14 +266,17 @@
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease-out;
-            background-color: #FAF8F5;
-            border-left: 1px solid #E4DFD5;
-            border-right: 1px solid #E4DFD5;
+            background-color: #FAF6EE;
+            border-left: 1px solid #D3C9B5;
+            border-right: 1px solid #D3C9B5;
+        }
+        .acc-content-inner {
+            padding: 5px 0;
         }
         .acc-group {
             padding: 15px;
             text-align: left;
-            border-bottom: 1px solid #EFECE6;
+            border-bottom: 1px solid #ECE4D5;
         }
         .acc-group-title {
             font-weight: bold;
@@ -290,7 +308,7 @@
         /* 6. 방명록 섹션 */
         .guestbook-subtitle {
             font-size: 0.9rem;
-            color: #777777;
+            color: #666666;
             margin-top: -5px;
             margin-bottom: 20px;
         }
@@ -302,11 +320,11 @@
         }
         .guestbook-form input, .guestbook-form textarea {
             padding: 10px;
-            border: 1px solid #E4DFD5;
+            border: 1px solid #D3C9B5;
             border-radius: 4px;
             font-family: 'Gowun Batang', serif;
             font-size: 0.85rem;
-            background-color: #FCFAF7;
+            background-color: #FAF8F2;
         }
         .guestbook-form textarea { resize: none; height: 60px; }
         .submit-btn {
@@ -321,22 +339,22 @@
         }
         .guestbook-list {
             text-align: left;
-            border-top: 1px solid #E4DFD5;
+            border-top: 1px solid #D3C9B5;
         }
         .guestbook-item {
             padding: 12px 5px;
-            border-bottom: 1px solid #F2EFE9;
+            border-bottom: 1px solid #ECE4D5;
             font-size: 0.85rem;
             cursor: pointer;
             user-select: none;
         }
         .guestbook-item:active {
-            background-color: #F5F2EB;
+            background-color: #EFE8DA;
         }
         .guestbook-meta {
             display: flex;
             justify-content: space-between;
-            color: #888888;
+            color: #777777;
             margin-bottom: 4px;
             font-size: 0.8rem;
         }
@@ -352,7 +370,7 @@
             border: none;
             cursor: pointer;
             font-family: 'Gowun Batang', serif;
-            color: #888;
+            color: #777;
             padding: 2px 6px;
         }
         .page-btn.active {
@@ -403,7 +421,7 @@
 
         /* 7. 마무리 섹션 */
         .footer-section {
-            background-color: #F4F1EA;
+            background-color: #EFE8DA;
             padding: 60px 20px;
             border-bottom: none;
         }
@@ -508,30 +526,32 @@
             </div>
             
             <div class="acc-content" id="accContent">
-                <div class="acc-group">
-                    <div class="acc-group-title">신랑 측</div>
-                    <div class="acc-row">
-                        <span>부산은행 057-12-096448-4 (이기주)</span>
-                        <button class="copy-btn" onclick="copyAccount('057120964484')">계좌 복사</button>
+                <div class="acc-content-inner">
+                    <div class="acc-group">
+                        <div class="acc-group-title">신랑 측</div>
+                        <div class="acc-row">
+                            <span>부산은행 057-12-096448-4 (이기주)</span>
+                            <button class="copy-btn" onclick="copyAccount('057120964484')">계좌 복사</button>
+                        </div>
+                        <div class="acc-row">
+                            <span>부산은행 057-12-050602-9 (윤미경)</span>
+                            <button class="copy-btn" onclick="copyAccount('057120506029')">계좌 복사</button>
+                        </div>
+                        <div class="acc-row">
+                            <span>부산은행 057-12-094556-6 (이용욱)</span>
+                            <button class="copy-btn" onclick="copyAccount('057120945566')">계좌 복사</button>
+                        </div>
                     </div>
-                    <div class="acc-row">
-                        <span>부산은행 057-12-050602-9 (윤미경)</span>
-                        <button class="copy-btn" onclick="copyAccount('057120506029')">계좌 복사</button>
-                    </div>
-                    <div class="acc-row">
-                        <span>부산은행 057-12-094556-6 (이용욱)</span>
-                        <button class="copy-btn" onclick="copyAccount('057120945566')">계좌 복사</button>
-                    </div>
-                </div>
-                <div class="acc-group">
-                    <div class="acc-group-title">신부 측</div>
-                    <div class="acc-row">
-                        <span>우리은행 1002-453-995808 (강호성)</span>
-                        <button class="copy-btn" onclick="copyAccount('1002453995808')">계좌 복사</button>
-                    </div>
-                    <div class="acc-row">
-                        <span>우리은행 1002-041-199939 (강지수)</span>
-                        <button class="copy-btn" onclick="copyAccount('1002041199939')">계좌 복사</button>
+                    <div class="acc-group">
+                        <div class="acc-group-title">신부 측</div>
+                        <div class="acc-row">
+                            <span>우리은행 1002-453-995808 (강호성)</span>
+                            <button class="copy-btn" onclick="copyAccount('1002453995808')">계좌 복사</button>
+                        </div>
+                        <div class="acc-row">
+                            <span>우리은행 1002-041-199939 (강지수)</span>
+                            <button class="copy-btn" onclick="copyAccount('1002041199939')">계좌 복사</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -790,7 +810,7 @@
             const paginatedItems = reversedData.slice(startIndex, endIndex);
 
             if(paginatedItems.length === 0) {
-                listContainer.innerHTML = "<p style='text-align:center; color:#999; padding:20px 0;'>첫 축하의 한마디를 남겨주세요.</p>";
+                listContainer.innerHTML = "<p style='text-align:center; color:#777; padding:20px 0;'>첫 축하의 한마디를 남겨주세요.</p>";
                 return;
             }
 
