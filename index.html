@@ -37,8 +37,8 @@
             padding-bottom: 20px;
         }
         .main-title {
-            font-size: 2.1rem; /* 크게 확대 */
-            font-weight: 300;  /* 얇게 조정 */
+            font-size: 1.6rem; 
+            font-weight: 300;  
             color: #222222;
             line-height: 1.5;
             margin: 0 0 40px 0;
@@ -63,7 +63,7 @@
             text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
         }
 
-        /* BGM 컨트롤러 버튼 */
+        /* BGM 컨트롤러 버튼 (정중앙 배치) */
         .bgm-center-container {
             display: flex;
             justify-content: center;
@@ -74,7 +74,7 @@
         .bgm-btn {
             background-color: #FFFFFF;
             border: 1px solid #C2B39E;
-            padding: 8px 20px;
+            padding: 8px 24px;
             font-size: 0.85rem;
             border-radius: 20px;
             color: #554A3C;
@@ -83,6 +83,12 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+            transition: all 0.15s ease-in-out;
+        }
+        .bgm-btn:active {
+            background-color: #F5F2EC;
         }
 
         /* 2. 인사말 섹션 */
@@ -101,14 +107,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             letter-spacing: 1px;
         }
-        /* 귀여운 초록색 나뭇잎 SVG 아이콘 */
-        .cute-leaf-svg {
-            width: 22px;
-            height: 22px;
-            fill: #7FA97A; /* 밝고 귀여운 초록색 */
+        .leaf-img {
+            width: 24px;  
+            height: 24px; 
+            object-fit: contain;
             vertical-align: middle;
         }
 
@@ -122,7 +127,6 @@
             align-items: center;
             gap: 8px;
         }
-        /* 영화 슬레이트 SVG 아이콘 */
         .slate-svg {
             width: 20px;
             height: 20px;
@@ -170,7 +174,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden; /* 줌 확장 시 마진 확보 */
+            overflow: hidden;
         }
         .lightbox img {
             max-width: 95%;
@@ -178,7 +182,7 @@
             object-fit: contain;
             user-select: none;
             -webkit-user-drag: none;
-            transition: transform 0.1s ease-out; /* 확대 시 부드럽게 움직임 */
+            transition: transform 0.1s ease-out;
             transform-origin: center center;
         }
         .lightbox-close {
@@ -434,7 +438,7 @@
 
         <div class="bgm-center-container">
             <button class="bgm-btn" id="bgmToggleBtn" onclick="toggleBgm()">
-                <span>▶ BGM 재생</span>
+                <span>▶ BGM 켜기</span>
             </button>
         </div>
 
@@ -448,7 +452,7 @@
             </div>
             <div class="names-box">
                 <span>지수</span> 
-                <svg class="cute-leaf-svg" viewBox="0 0 24 24"><path d="M2,21C2,21 5,18 7,18C9,18 12,20 14,18C16,16 15,12 17,10C19,8 21,8 22,7C23,6 22,4 21,4C20,4 18,3 16,5C14,7 13,9 11,11C9,13 6,12 4,14C2,16 2,19 2,21M17.84,6.16C19.16,4.84 20.47,4.88 20.84,5.16C21.12,5.53 21.16,6.84 19.84,8.16C18.57,9.43 17,10 16.5,9.5C16,9 16.57,7.43 17.84,6.16Z"/></svg>
+                <img src="leaf.png" alt="🍃" class="leaf-img">
                 <span>용욱</span>
             </div>
         </section>
@@ -576,16 +580,53 @@
     </div>
 
     <script>
-        /* === 1. BGM 컨트롤 시스템 === */
+        /* === 1. 고도화된 BGM 컨트롤 및 모바일 인터랙션 자동재생 제어 === */
+        const audio = document.getElementById('weddingBgm');
+        const btn = document.getElementById('bgmToggleBtn');
+        let isUserPaused = false; // 사용자가 수동으로 껐는지 여부를 추적
+
+        // 브라우저 정책 우회용 자동재생 함수
+        function tryAutoplay() {
+            if (!isUserPaused && audio.paused) {
+                audio.play().then(() => {
+                    btn.innerHTML = "<span>■ BGM 끄기</span>";
+                    // 성공적으로 자동재생되면 리스너들을 모두 제거하여 과부하 방지
+                    removeAutoplayListeners();
+                }).catch(err => {
+                    console.log("브라우저가 아직 상호작용을 대기 중입니다.");
+                });
+            }
+        }
+
+        function removeAutoplayListeners() {
+            document.removeEventListener('click', tryAutoplay);
+            document.removeEventListener('touchstart', tryAutoplay);
+            document.removeEventListener('scroll', tryAutoplay);
+        }
+
+        // 페이지 진입 즉시 실행 가능한 환경이면 재생 시도
+        window.addEventListener('DOMContentLoaded', () => {
+            audio.play().then(() => {
+                btn.innerHTML = "<span>■ BGM 끄기</span>";
+            }).catch(() => {
+                // 상호작용 차단 시 터치, 스크롤, 클릭하는 순간 바로 재생 트리거 바인딩
+                document.addEventListener('click', tryAutoplay);
+                document.addEventListener('touchstart', tryAutoplay);
+                document.addEventListener('scroll', tryAutoplay);
+            });
+        });
+
+        // 수동 버튼 토글 인터페이스 로직 개편
         function toggleBgm() {
-            const audio = document.getElementById('weddingBgm');
-            const btn = document.getElementById('bgmToggleBtn');
             if (audio.paused) {
-                audio.play().catch(e => alert("음악 재생은 브라우저 정책상 화면 터치 후 활성화됩니다."));
-                btn.innerHTML = "<span>■ BGM 멈춤</span>";
+                isUserPaused = false;
+                audio.play().catch(e => alert("화면을 한 번 터치한 뒤 사용해 주세요."));
+                btn.innerHTML = "<span>■ BGM 끄기</span>";
             } else {
+                isUserPaused = true;
                 audio.pause();
-                btn.innerHTML = "<span>▶ BGM 재생</span>";
+                btn.innerHTML = "<span>▶ BGM 켜기</span>";
+                removeAutoplayListeners(); // 사용자가 명확하게 껐으므로 자동재생 리스너도 제거
             }
         }
 
@@ -601,7 +642,6 @@
         let touchStartX = 0;
         let touchEndX = 0;
         
-        // 줌 인터랙션 상태 저장 변수들
         const imgEl = document.getElementById('lightboxImg');
         let currentScale = 1;
         let initialZoomDist = 0;
@@ -626,25 +666,23 @@
         }
 
         function nextImage() {
-            if (currentScale > 1) return; // 이미지 확대 상태에서는 슬라이드 전환 방지
+            if (currentScale > 1) return; 
             activeImgIdx = (activeImgIdx + 1) % galleryImages.length;
             updateLightboxImg();
         }
 
         function prevImage() {
-            if (currentScale > 1) return; // 이미지 확대 상태에서는 슬라이드 전환 방지
+            if (currentScale > 1) return; 
             activeImgIdx = (activeImgIdx - 1 + galleryImages.length) % galleryImages.length;
             updateLightboxImg();
         }
 
-        // 터치 제스처 처리기 통합 빌드 (스위핑 및 핀치줌 동시 대응)
         const lightboxArea = document.getElementById('lightbox');
 
         lightboxArea.addEventListener('touchstart', function(e) {
             if (e.touches.length === 1) {
                 touchStartX = e.touches[0].screenX;
                 
-                // 모바일 더블 탭 확대 감지 (300ms 이내 재터치 판정)
                 let currentTime = new Date().getTime();
                 let tapLength = currentTime - lastTapTime;
                 if (tapLength < 300 && tapLength > 0) {
@@ -653,7 +691,6 @@
                 }
                 lastTapTime = currentTime;
             } else if (e.touches.length === 2) {
-                // 핀치 줌 시작 거리 기록
                 initialZoomDist = Math.hypot(
                     e.touches[0].pageX - e.touches[1].pageX,
                     e.touches[0].pageY - e.touches[1].pageY
@@ -663,7 +700,6 @@
 
         lightboxArea.addEventListener('touchmove', function(e) {
             if (e.touches.length === 2 && initialZoomDist > 0) {
-                // 두 손가락으로 벌릴 때 실시간 확대 축소 처리 계산
                 let currentDist = Math.hypot(
                     e.touches[0].pageX - e.touches[1].pageX,
                     e.touches[0].pageY - e.touches[1].pageY
@@ -671,8 +707,8 @@
                 let scaleFactor = currentDist / initialZoomDist;
                 
                 let targetScale = currentScale * scaleFactor;
-                if (targetScale > 3) targetScale = 3;  // 최대 3배 확대 제한
-                if (targetScale < 1) targetScale = 1;  // 최소 기본 크기 하한선
+                if (targetScale > 3) targetScale = 3;  
+                if (targetScale < 1) targetScale = 1;  
                 
                 imgEl.style.transform = `scale(${targetScale})`;
                 e.preventDefault();
@@ -683,14 +719,12 @@
             if (e.touches.length === 0) {
                 if (e.changedTouches.length === 1) {
                     touchEndX = e.changedTouches[0].screenX;
-                    // 확대 상태가 아닐 때만 슬라이드 스위핑 허용
                     if (currentScale === 1) {
                         const swipeThreshold = 40;
                         if (touchStartX - touchEndX > swipeThreshold) nextImage();
                         else if (touchEndX - touchStartX > swipeThreshold) prevImage();
                     }
                 }
-                // 손가락이 화면에서 모두 떨어지면 현재 스케일값 고정 저장
                 let transformMatrix = window.getComputedStyle(imgEl).transform;
                 if (transformMatrix !== 'none') {
                     let values = transformMatrix.split('(')[1].split(')')[0].split(',');
@@ -700,17 +734,15 @@
             }
         }, false);
 
-        // 더블 탭 토글 모듈
         function toggleDoubleTapZoom() {
             if (currentScale > 1) {
                 currentScale = 1;
             } else {
-                currentScale = 2.2; // 더블 탭 시 2.2배 확대
+                currentScale = 2.2; 
             }
             imgEl.style.transform = `scale(${currentScale})`;
         }
 
-        // PC 브라우저 마우스 클릭 이동 예외처리 마감
         lightboxArea.addEventListener('mousedown', function(e) { touchStartX = e.screenX; }, false);
         lightboxArea.addEventListener('mouseup', function(e) {
             touchEndX = e.screenX;
@@ -736,7 +768,7 @@
             }
         }
 
-        /* === 4. 계좌 복사 크로스브라우징 기법 === */
+        /* === 4. 계좌 복사 기능 === */
         function copyAccount(accountNumber) {
             navigator.clipboard.writeText(accountNumber).then(() => {
                 alert("계좌번호가 성공적으로 복사되었습니다.");
@@ -751,7 +783,7 @@
             });
         }
 
-        /* === 5. 데이터 셋업 방명록 페이징 모듈 === */
+        /* === 5. 방명록 시스템 및 페이징 모듈 === */
         let guestbookData = JSON.parse(localStorage.getItem('wedding_guestbook')) || [
             {id: 1, name: "상헌", message: "두 분 결혼을 진심으로 축하드립니다!! 멋지게 사세요!", date: "2026.06.01"},
             {id: 2, name: "지은", message: "아름다운 세상에서 평생 재미있게 행복하시길 축하해요!", date: "2026.06.02"}
@@ -787,7 +819,6 @@
                     <div class="guestbook-text">${item.message.replace(/\n/g, '<br>')}</div>
                 `;
 
-                // 관리용 롱프레스 핸들러 작동 유지
                 const startPress = () => { pressTimer = setTimeout(() => { openDeleteModal(item.id); }, 800); };
                 const cancelPress = () => { clearTimeout(pressTimer); };
 
