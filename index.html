@@ -5,10 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=yes">
     <title>우리의 결혼식에 초대합니다</title>
     
+    <!-- 💡 카카오톡 및 문자 공유용 오픈 그래프(Open Graph) 메타 태그 최종 정밀 세팅 -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="우리의 결혼식에 초대합니다.">
+    <meta property="og:title" content="우리 결혼식에 초대합니다!">
     <meta property="og:description" content="2026. 8. 8.(토) 11:30">
-    <meta property="og:image" content="photo13.JPG"> <meta property="og:url" content="https://yongwooklee.github.io/"> <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@300;400;700&display=swap">
+    <meta property="og:image" content="photo13.JPG"> 
+    <meta property="og:url" content="https://yongwooklee.github.io/"> 
+
+    <!-- 구글 폰트: 고운바탕(Gowun Batang) 서체 사용 -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@300;400;700&display=swap">
     
     <style>
         /* === 전통 한지(Hanji) 질감 배경 무드 커스텀 디자인 === */
@@ -57,8 +62,16 @@
             font-weight: 300;  
             color: #222222;
             line-height: 1.5;
-            margin: 0 0 40px 0;
+            margin: 0 0 15px 0;
             letter-spacing: -0.5px;
+        }
+        /* 메인 상단 타이틀 하단 일시/장소 폰트 크기 및 스타일 */
+        .main-datetime-venue {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #555555;
+            margin-bottom: 35px;
+            font-weight: 400;
         }
         .photo-container {
             width: 100%;
@@ -211,7 +224,7 @@
             z-index: 10001;
         }
 
-        /* 4. 오시는 길 섹션 */
+        /* 4. 오시는 길 섹션 및 교통수단 컴포넌트 */
         .map-wrapper {
             width: 100%;
             margin: 20px 0;
@@ -242,6 +255,39 @@
         .btn-tmap { background-color: #1F1F1F; }
         .btn-kakao { background-color: #FFEB00; color: #3C1E1E; }
         .btn-naver { background-color: #03C75A; }
+
+        /* 교통안내 디테일 스타일 패널 */
+        .transport-container {
+            margin-top: 30px;
+            text-align: left;
+            border-top: 1px dashed #DCD4C4;
+            padding-top: 20px;
+        }
+        .transport-row {
+            margin-bottom: 18px;
+        }
+        .transport-row:last-child {
+            margin-bottom: 0;
+        }
+        .transport-badge {
+            display: inline-block;
+            font-size: 0.78rem;
+            font-weight: bold;
+            padding: 3px 8px;
+            border-radius: 3px;
+            color: #FFFFFF;
+            margin-bottom: 6px;
+        }
+        .badge-subway { background-color: #EC8C2F; } /* 지하철 주황 */
+        .badge-bus { background-color: #3B5AA4; }    /* 버스 파랑 */
+        .badge-parking { background-color: #616F5E; }/* 주차 국방/카키색계열 */
+        
+        .transport-desc {
+            font-size: 0.88rem;
+            line-height: 1.6;
+            color: #444444;
+            padding-left: 2px;
+        }
 
         /* 5. 마음 전하실 곳 섹션 */
         .acc-btn-box {
@@ -308,15 +354,26 @@
             justify-content: space-between;
             align-items: center;
             font-size: 0.85rem;
-            margin-bottom: 6px;
+            margin-bottom: 12px;
         }
         .acc-row:last-child {
             margin-bottom: 0;
         }
+        /* 이름 정보가 분리되어 떨어지는 전용 박스 */
+        .acc-no-name-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+        .acc-under-name {
+            font-size: 0.82rem;
+            color: #666666;
+            padding-left: 2px;
+        }
         .copy-btn {
             background-color: #FFFFFF;
             border: 1px solid #C2B39E;
-            padding: 3px 8px;
+            padding: 4px 10px;
             font-size: 0.75rem;
             border-radius: 3px;
             cursor: pointer;
@@ -455,22 +512,30 @@
 
     <div class="container">
         
+        <!-- 오디오 객체 연동 -->
         <audio id="weddingBgm" loop src="wedding-bgm.mp3.m4a"></audio>
 
+        <!-- [1] 메인 섹션 (💡 수정사항 2번: 타이틀 하단 장소 및 일시 데이터 바인딩 완료) -->
         <section class="main-section">
             <h1 class="main-title">우리 결혼식에<br>당신을 초대하고 싶습니다!</h1>
+            <div class="main-datetime-venue">
+                2026. 8. 8.(토) 11:30<br>
+                W웨딩 국민연금 웨딩홀 1층 컨벤션 홀
+            </div>
             <div class="photo-container">
                 <img src="photo13.JPG" alt="결혼식 메인 사진">
                 <div class="credit">Thanks to 상헌&지은lee</div>
             </div>
         </section>
 
+        <!-- BGM 컨트롤러 버튼 -->
         <div class="bgm-center-container">
             <button class="bgm-btn" id="bgmToggleBtn" onclick="toggleBgm()">
                 <span>▶ BGM 켜기</span>
             </button>
         </div>
 
+        <!-- [2] 인사말 섹션 -->
         <section class="intro-section">
             <div class="intro-text">
                 세상이 아름답길 바라는 남자와<br>
@@ -486,6 +551,7 @@
             </div>
         </section>
 
+        <!-- [3] 사진첩 섹션 -->
         <section>
             <div class="section-large-title">
                 사진첩 
@@ -516,6 +582,7 @@
             </div>
         </section>
 
+        <!-- [확대 팝업] 라이트박스 -->
         <div id="lightbox" class="lightbox" onclick="closeLightbox()">
             <span class="lightbox-close" onclick="event.stopPropagation(); closeLightbox();">&times;</span>
             <div class="lightbox-content-wrapper" id="lightboxWrapper">
@@ -523,6 +590,7 @@
             </div>
         </div>
 
+        <!-- [4] 오시는 길 및 상세 교통편 안내 섹션 (💡 수정사항 3번: 교통편 내용 확장 구성 완료) -->
         <section class="map-section">
             <div style="font-size: 1.05rem; margin-bottom: 5px; font-weight: bold;">오시는 길</div>
             <div style="font-size: 0.9rem; color: #111111; margin-bottom: 3px; font-weight: bold;">W웨딩 국민연금 웨딩홀 1층 컨벤션 홀</div>
@@ -537,8 +605,25 @@
                 <a href="kakaonavi://search?q=W웨딩 국민연금 웨딩홀" class="navi-btn btn-kakao">카카오내비</a>
                 <a href="nmap://search?query=W웨딩%20국민연금웨딩홀&appname=github.io" class="navi-btn btn-naver">네이버지도</a>
             </div>
+
+            <!-- 지하철, 버스, 주차 상세 구조 패널 배치 -->
+            <div class="transport-container">
+                <div class="transport-row">
+                    <span class="transport-badge badge-subway">지하철</span>
+                    <div class="transport-desc"><strong>1호선 시청역</strong> 하차 (2번 출구 이용)</div>
+                </div>
+                <div class="transport-row">
+                    <span class="transport-badge badge-bus">시내버스</span>
+                    <div class="transport-desc">29, 86, 87, 99, 110-1, 131, 141, 179 번 이용</div>
+                </div>
+                <div class="transport-row">
+                    <span class="transport-badge badge-parking">주차시설</span>
+                    <div class="transport-desc">국민연금 빌딩 지하 2층 ~ 지하 4층<br>(총 350대 수용 공간 / 하객 무료 주차 3시간 제공)</div>
+                </div>
+            </div>
         </section>
 
+        <!-- [5] 마음 전하실 곳 섹션 (💡 수정사항 4번: 반응형 안전을 위한 (이름) 하단 강제 줄바꿈 처리 완료) -->
         <section>
             <div class="acc-btn-box" onclick="toggleAccordion()">
                 <button class="acc-btn">축복의 마음 전하실 곳</button>
@@ -546,41 +631,56 @@
             
             <div class="acc-content" id="accContent">
                 <div class="acc-content-inner">
+                    <!-- 신랑 측 계좌 그룹 -->
                     <div class="acc-group">
                         <div class="acc-sub-block">
                             <span class="acc-label">신랑 측</span>
                             <span class="acc-label" style="font-weight: normal; color: #333;">혼주 : 이기주, 윤미경</span>
                         </div>
                         <div class="acc-row">
-                            <span>부산은행 057-12-096448-4 (이기주)</span>
+                            <div class="acc-no-name-wrap">
+                                <span>부산은행 057-12-096448-4</span>
+                                <span class="acc-under-name">(이기주)</span>
+                            </div>
                             <button class="copy-btn" onclick="copyAccount('057120964484')">계좌 복사</button>
                         </div>
-                        <div class="acc-row" style="margin-bottom: 15px;">
-                            <span>부산은행 057-12-050602-9 (윤미경)</span>
+                        <div class="acc-row" style="margin-bottom: 20px;">
+                            <div class="acc-no-name-wrap">
+                                <span>부산은행 057-12-050602-9</span>
+                                <span class="acc-under-name">(윤미경)</span>
+                            </div>
                             <button class="copy-btn" onclick="copyAccount('057120506029')">계좌 복사</button>
                         </div>
                         <div class="acc-sub-block">
                             <span class="acc-label" style="font-weight: normal; color: #333;">신랑 : 이용욱</span>
                         </div>
                         <div class="acc-row">
-                            <span>부산은행 057-12-094556-6</span>
+                            <div class="acc-no-name-wrap">
+                                <span>부산은행 057-12-094556-6</span>
+                            </div>
                             <button class="copy-btn" onclick="copyAccount('057120945566')">계좌 복사</button>
                         </div>
                     </div>
+                    <!-- 신부 측 계좌 그룹 -->
                     <div class="acc-group">
                         <div class="acc-sub-block">
                             <span class="acc-label">신부 측</span>
                             <span class="acc-label" style="font-weight: normal; color: #333;">혼주 : 강호성, 박성희</span>
                         </div>
-                        <div class="acc-row" style="margin-bottom: 15px;">
-                            <span>우리은행 1002-453-995808 (강호성)</span>
+                        <div class="acc-row" style="margin-bottom: 20px;">
+                            <div class="acc-no-name-wrap">
+                                <span>우리은행 1002-453-995808</span>
+                                <span class="acc-under-name">(강호성)</span>
+                            </div>
                             <button class="copy-btn" onclick="copyAccount('1002453995808')">계좌 복사</button>
                         </div>
                         <div class="acc-sub-block">
                             <span class="acc-label" style="font-weight: normal; color: #333;">신부 : 강지수</span>
                         </div>
                         <div class="acc-row">
-                            <span>우리은행 1002-041-199939</span>
+                            <div class="acc-no-name-wrap">
+                                <span>우리은행 1002-041-199939</span>
+                            </div>
                             <button class="copy-btn" onclick="copyAccount('1002041199939')">계좌 복사</button>
                         </div>
                     </div>
@@ -588,6 +688,7 @@
             </div>
         </section>
 
+        <!-- [6] 방명록 섹션 -->
         <section>
             <div class="section-large-title">방명록 ⌨️</div>
             <div class="guestbook-subtitle">자유롭게 써주세요~</div>
@@ -602,6 +703,7 @@
             <div class="pagination" id="pagination"></div>
         </section>
 
+        <!-- 삭제 처리 전용 프레임 모달 -->
         <div id="deleteModal" class="delete-modal">
             <div class="delete-modal-content">
                 <div class="delete-modal-text">이 방명록 게시물을 삭제하시겠습니까?</div>
@@ -612,6 +714,7 @@
             </div>
         </div>
 
+        <!-- [7] 마무리 섹션 -->
         <section class="footer-section">
             <div class="footer-text">
                 당신의 가정이 언제나 행복하시기를 소망하며<br>
