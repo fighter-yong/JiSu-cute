@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=yes">
     <title>우리의 결혼식에 초대합니다</title>
     
-    <!-- 💡 카카오톡 및 문자 공유용 오픈 그래프(Open Graph) 메타 태그 최종 정밀 세팅 -->
+    <!-- 카카오톡 및 문자 공유용 오픈 그래프(Open Graph) 메타 태그 -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="우리 결혼식에 초대합니다!">
     <meta property="og:description" content="2026. 8. 8.(토) 11:30">
     <meta property="og:image" content="photo13.JPG"> 
-    <meta property="og:url" content="https://yongwooklee.github.io/"> 
+    <meta property="og:url" content="https://fighter-yong.github.io/jisu-cute"> <!-- 💡 바뀐 주소 반영 -->
 
     <!-- 구글 폰트: 고운바탕(Gowun Batang) 서체 사용 -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@300;400;700&display=swap">
@@ -65,7 +65,6 @@
             margin: 0 0 15px 0;
             letter-spacing: -0.5px;
         }
-        /* 메인 상단 타이틀 하단 일시/장소 폰트 크기 및 스타일 */
         .main-datetime-venue {
             font-size: 0.9rem;
             line-height: 1.6;
@@ -163,10 +162,10 @@
             vertical-align: middle;
         }
 
-        /* 3. 사진첩 섹션 (가변 Grid 레이아웃) */
+        /* 3. 사진첩 섹션 (가변 Grid 레이아웃 개편) */
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(6, 1fr);
+            grid-template-columns: repeat(6, 1fr); /* 6열 기준 설계 */
             gap: 6px;
             margin-top: 20px;
         }
@@ -177,8 +176,8 @@
             cursor: pointer;
             border-radius: 2px;
         }
-        .col-3 { grid-column: span 2; }
-        .col-2 { grid-column: span 3; }
+        .col-3 { grid-column: span 2; } /* 3열 정렬용 (6칸 중 2칸 차지) */
+        .col-2 { grid-column: span 3; } /* 2열 정렬용 (6칸 중 3칸 차지) */
         .gallery-item img {
             width: 100%;
             height: 100%;
@@ -224,7 +223,7 @@
             z-index: 10001;
         }
 
-        /* 4. 오시는 길 섹션 및 교통수단 컴포넌트 */
+        /* 4. 오시는 길 섹션 */
         .map-wrapper {
             width: 100%;
             margin: 20px 0;
@@ -278,9 +277,9 @@
             color: #FFFFFF;
             margin-bottom: 6px;
         }
-        .badge-subway { background-color: #EC8C2F; } /* 지하철 주황 */
-        .badge-bus { background-color: #3B5AA4; }    /* 버스 파랑 */
-        .badge-parking { background-color: #616F5E; }/* 주차 국방/카키색계열 */
+        .badge-subway { background-color: #EC8C2F; } 
+        .badge-bus { background-color: #3B5AA4; }    
+        .badge-parking { background-color: #616F5E; }
         
         .transport-desc {
             font-size: 0.88rem;
@@ -359,7 +358,6 @@
         .acc-row:last-child {
             margin-bottom: 0;
         }
-        /* 이름 정보가 분리되어 떨어지는 전용 박스 */
         .acc-no-name-wrap {
             display: flex;
             flex-direction: column;
@@ -515,7 +513,7 @@
         <!-- 오디오 객체 연동 -->
         <audio id="weddingBgm" loop src="wedding-bgm.mp3.m4a"></audio>
 
-        <!-- [1] 메인 섹션 (💡 수정사항 2번: 타이틀 하단 장소 및 일시 데이터 바인딩 완료) -->
+        <!-- [1] 메인 섹션 -->
         <section class="main-section">
             <h1 class="main-title">우리 결혼식에<br>당신을 초대하고 싶습니다!</h1>
             <div class="main-datetime-venue">
@@ -551,7 +549,7 @@
             </div>
         </section>
 
-        <!-- [3] 사진첩 섹션 -->
+        <!-- [3] 사진첩 섹션 (총 20장, 비정형 Grid 정렬 시스템) -->
         <section>
             <div class="section-large-title">
                 사진첩 
@@ -559,6 +557,7 @@
             </div>
             
             <div class="gallery-grid">
+                <!-- 1행~5행 (1번 ~ 15번 사진: 3열 정렬 고정) -->
                 <div class="gallery-item col-3" onclick="openLightbox(0)"><img src="photo1.JPG" alt="사진1"></div>
                 <div class="gallery-item col-3" onclick="openLightbox(1)"><img src="photo2.jpg" alt="사진2"></div>
                 <div class="gallery-item col-3" onclick="openLightbox(2)"><img src="photo3.JPG" alt="사진3"></div>
@@ -575,10 +574,14 @@
                 <div class="gallery-item col-3" onclick="openLightbox(13)"><img src="photo14.jpg" alt="사진14"></div>
                 <div class="gallery-item col-3" onclick="openLightbox(14)"><img src="photo15.jpg" alt="사진15"></div>
                 
-                <div class="gallery-item col-2" onclick="openLightbox(15)"><img src="photo16.jpg" alt="사진16"></div>
-                <div class="gallery-item col-2" onclick="openLightbox(16)"><img src="photo17.jpg" alt="사진17"></div>
-                <div class="gallery-item col-2" onclick="openLightbox(17)"><img src="photo18.jpg" alt="사진18"></div>
+                <!-- 6행 (16번, 17번, 18번 사진: 3열 균등 정렬 배치) -->
+                <div class="gallery-item col-3" onclick="openLightbox(15)"><img src="photo16.jpg" alt="사진16"></div>
+                <div class="gallery-item col-3" onclick="openLightbox(16)"><img src="photo17.jpg" alt="사진17"></div>
+                <div class="gallery-item col-3" onclick="openLightbox(17)"><img src="photo18.jpg" alt="사진18"></div>
+
+                <!-- 7행 (19번, 💡 신규 배치된 photo20.jpg 사진: 2열 대칭 정렬 배치) -->
                 <div class="gallery-item col-2" onclick="openLightbox(18)"><img src="photo19.jpg" alt="사진19"></div>
+                <div class="gallery-item col-2" onclick="openLightbox(19)"><img src="photo20.jpg" alt="사진20"></div>
             </div>
         </section>
 
@@ -590,7 +593,7 @@
             </div>
         </div>
 
-        <!-- [4] 오시는 길 및 상세 교통편 안내 섹션 (💡 수정사항 3번: 교통편 내용 확장 구성 완료) -->
+        <!-- [4] 오시는 길 섹션 -->
         <section class="map-section">
             <div style="font-size: 1.05rem; margin-bottom: 5px; font-weight: bold;">오시는 길</div>
             <div style="font-size: 0.9rem; color: #111111; margin-bottom: 3px; font-weight: bold;">W웨딩 국민연금 웨딩홀 1층 컨벤션 홀</div>
@@ -606,7 +609,7 @@
                 <a href="nmap://search?query=W웨딩%20국민연금웨딩홀&appname=github.io" class="navi-btn btn-naver">네이버지도</a>
             </div>
 
-            <!-- 지하철, 버스, 주차 상세 구조 패널 배치 -->
+            <!-- 대중교통 정보 가이드 -->
             <div class="transport-container">
                 <div class="transport-row">
                     <span class="transport-badge badge-subway">지하철</span>
@@ -623,7 +626,7 @@
             </div>
         </section>
 
-        <!-- [5] 마음 전하실 곳 섹션 (💡 수정사항 4번: 반응형 안전을 위한 (이름) 하단 강제 줄바꿈 처리 완료) -->
+        <!-- [5] 마음 전하실 곳 섹션 -->
         <section>
             <div class="acc-btn-box" onclick="toggleAccordion()">
                 <button class="acc-btn">축복의 마음 전하실 곳</button>
@@ -772,11 +775,12 @@
 
         /* === 2. 라이트박스 뷰어 및 스위핑 + 모바일 멀티 터치 줌 인터랙션 기능 === */
         let activeImgIdx = 0;
+        // 💡 photo20.jpg 배열 데이터 추가 완료 (총 20장 맵)
         const galleryImages = [
             'photo1.JPG', 'photo2.jpg', 'photo3.JPG', 'photo4.JPG', 'photo5.jpg',
             'photo6.jpg', 'photo7.jpg', 'photo8.jpg', 'photo9.jpg', 'photo10.jpg',
             'photo11.jpg', 'photo12.jpg', 'photo13.JPG', 'photo14.jpg', 'photo15.jpg',
-            'photo16.jpg', 'photo17.jpg', 'photo18.jpg', 'photo19.jpg'
+            'photo16.jpg', 'photo17.jpg', 'photo18.jpg', 'photo19.jpg', 'photo20.jpg'
         ];
 
         let touchStartX = 0;
