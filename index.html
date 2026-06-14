@@ -10,7 +10,7 @@
     <meta property="og:title" content="우리 결혼식에 초대합니다!">
     <meta property="og:description" content="2026. 8. 8.(토) 11:30">
     <meta property="og:image" content="photo13.JPG"> 
-    <meta property="og:url" content="https://fighter-yong.github.io/jisu-cute"> <!-- 💡 바뀐 주소 반영 -->
+    <meta property="og:url" content="https://fighter-yong.github.io/jisu-cute"> 
 
     <!-- 구글 폰트: 고운바탕(Gowun Batang) 서체 사용 -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@300;400;700&display=swap">
@@ -162,10 +162,10 @@
             vertical-align: middle;
         }
 
-        /* 3. 사진첩 섹션 (가변 Grid 레이아웃 개편) */
+        /* 3. 사진첩 섹션 (가변 Grid 레이아웃) */
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(6, 1fr); /* 6열 기준 설계 */
+            grid-template-columns: repeat(6, 1fr); 
             gap: 6px;
             margin-top: 20px;
         }
@@ -176,8 +176,8 @@
             cursor: pointer;
             border-radius: 2px;
         }
-        .col-3 { grid-column: span 2; } /* 3열 정렬용 (6칸 중 2칸 차지) */
-        .col-2 { grid-column: span 3; } /* 2열 정렬용 (6칸 중 3칸 차지) */
+        .col-3 { grid-column: span 2; } 
+        .col-2 { grid-column: span 3; } 
         .gallery-item img {
             width: 100%;
             height: 100%;
@@ -549,7 +549,7 @@
             </div>
         </section>
 
-        <!-- [3] 사진첩 섹션 (총 20장, 비정형 Grid 정렬 시스템) -->
+        <!-- [3] 사진첩 섹션 (💡 photo16과 photo20 위치 맞교환) -->
         <section>
             <div class="section-large-title">
                 사진첩 
@@ -557,7 +557,7 @@
             </div>
             
             <div class="gallery-grid">
-                <!-- 1행~5행 (1번 ~ 15번 사진: 3열 정렬 고정) -->
+                <!-- 1행~5행 (1번 ~ 15번 사진: 3열 정렬) -->
                 <div class="gallery-item col-3" onclick="openLightbox(0)"><img src="photo1.JPG" alt="사진1"></div>
                 <div class="gallery-item col-3" onclick="openLightbox(1)"><img src="photo2.jpg" alt="사진2"></div>
                 <div class="gallery-item col-3" onclick="openLightbox(2)"><img src="photo3.JPG" alt="사진3"></div>
@@ -574,14 +574,14 @@
                 <div class="gallery-item col-3" onclick="openLightbox(13)"><img src="photo14.jpg" alt="사진14"></div>
                 <div class="gallery-item col-3" onclick="openLightbox(14)"><img src="photo15.jpg" alt="사진15"></div>
                 
-                <!-- 6행 (16번, 17번, 18번 사진: 3열 균등 정렬 배치) -->
-                <div class="gallery-item col-3" onclick="openLightbox(15)"><img src="photo16.jpg" alt="사진16"></div>
+                <!-- 6행 (위치 교환: 16번 자리에 photo20.jpg 배치, 17번, 18번 순) -->
+                <div class="gallery-item col-3" onclick="openLightbox(15)"><img src="photo20.jpg" alt="사진20"></div>
                 <div class="gallery-item col-3" onclick="openLightbox(16)"><img src="photo17.jpg" alt="사진17"></div>
                 <div class="gallery-item col-3" onclick="openLightbox(17)"><img src="photo18.jpg" alt="사진18"></div>
 
-                <!-- 7행 (19번, 💡 신규 배치된 photo20.jpg 사진: 2열 대칭 정렬 배치) -->
+                <!-- 7행 (위치 교환: 19번, 20번 자리에 photo16.jpg 배치) -->
                 <div class="gallery-item col-2" onclick="openLightbox(18)"><img src="photo19.jpg" alt="사진19"></div>
-                <div class="gallery-item col-2" onclick="openLightbox(19)"><img src="photo20.jpg" alt="사진20"></div>
+                <div class="gallery-item col-2" onclick="openLightbox(19)"><img src="photo16.jpg" alt="사진16"></div>
             </div>
         </section>
 
@@ -775,12 +775,12 @@
 
         /* === 2. 라이트박스 뷰어 및 스위핑 + 모바일 멀티 터치 줌 인터랙션 기능 === */
         let activeImgIdx = 0;
-        // 💡 photo20.jpg 배열 데이터 추가 완료 (총 20장 맵)
+        // 💡 16번 사진과 20번 사진의 스크립트 인덱스 순서도 레이아웃 변경에 맞춰 교환 처리 완료
         const galleryImages = [
             'photo1.JPG', 'photo2.jpg', 'photo3.JPG', 'photo4.JPG', 'photo5.jpg',
             'photo6.jpg', 'photo7.jpg', 'photo8.jpg', 'photo9.jpg', 'photo10.jpg',
             'photo11.jpg', 'photo12.jpg', 'photo13.JPG', 'photo14.jpg', 'photo15.jpg',
-            'photo16.jpg', 'photo17.jpg', 'photo18.jpg', 'photo19.jpg', 'photo20.jpg'
+            'photo20.jpg', 'photo17.jpg', 'photo18.jpg', 'photo19.jpg', 'photo16.jpg'
         ];
 
         let touchStartX = 0;
